@@ -1,9 +1,6 @@
 
 #Traitement et recodage de la base EPIC: 
 
-
-
-
 #IndCOU: Indicateur de relation amoureuse importante lors de l'enquête
 #R_IMPREL: Importance de la religion pour l'enquêté
 #R_RELIGC: Religion du conjoint
@@ -27,6 +24,8 @@
 
 #------------------------------------------------------------------------------------------
 
+#Renomer les variables :
+
 names(epic)<-c('Indic_relation_amour',
                'Importance_religion_enquete',
                'Religion_conjoint',
@@ -44,20 +43,17 @@ names(epic)<-c('Indic_relation_amour',
 
 #------------------------------------------------------------------------------------------
 
-#Trie à plat pour la variable Indic_relation_amour :
+#Traitement de la variable Indic_relation_amour :
 
 epic$Indic_relation_amour <- as.factor(epic$Indic_relation_amour) #je transforme ma variable en facteur.
 
 epic$Indic_relation_amour <- fct_recode(epic$Indic_relation_amour,
                                         "Autre situation"="0",
-                                        "relation amoureuse ou en couple "="1",)
-
-table(epic$Indic_relation_amour)
+                                        "relation amoureuse ou en couple "="1")
 
 #------------------------------------------------------------------------------------------
 
-
-#Trie à plat pour la variable Indic_relation_amour :
+#Traitement de la variable Importance_religion_enquete :
 
 epic$Importance_religion_enquete <- as.factor(epic$Importance_religion_enquete) #je transforme ma variable en facteur.
 
@@ -65,15 +61,11 @@ epic$Importance_religion_enquete <- fct_recode(epic$Importance_religion_enquete,
                                                "Importante ou assez importante"="1",
                                                "Peu importante "="2",
                                                "Sans importance"= "3",
-                                               "Ne souhaite pas répondre"="8"
-)
+                                               "Ne souhaite pas répondre"="8")
 
-table(epic$Importance_religion_enquete)
 #------------------------------------------------------------------------------------------
 
-#Religion_conjoint:
-
-#Trie à plat pour la variable Indic_relation_amour :
+#Traitement de la variable Indic_relation_amour :
 
 epic$Religion_conjoint <- as.factor(epic$Religion_conjoint) #je transforme ma variable en facteur.
 
@@ -87,15 +79,11 @@ epic$Religion_conjoint <- fct_recode(epic$Religion_conjoint,
                                      "Autre"="7",
                                      "Sans religion"="8",
                                      "Ne souhaite pas répondre"="98",
-                                     "Ne sait pas"="99"
-)
-
-table(epic$Religion_conjoint)
-
+                                     "Ne sait pas"="99")
 
 #------------------------------------------------------------------------------------------
 
-#Trie à plat pour la variable Religion_enquete :
+#Traitement de la variable Religion_enquete :
 
 epic$Religion_enquete <- as.factor(epic$Religion_enquete) #je transforme ma variable en facteur.
 
@@ -108,15 +96,11 @@ epic$Religion_enquete <- fct_recode(epic$Religion_enquete,
                                     "Judaïsme"="6",
                                     "Autre"="7",
                                     "Sans religion"="8",
-                                    "Ne souhaite pas répondre"="98"
-                                    
-)
-
-table(epic$Religion_enquete)
+                                    "Ne souhaite pas répondre"="98")
 
 #------------------------------------------------------------------------------------------
 
-#Construction de la variable Religiosite :
+#Construction et traitement de la variable Religiosite :
 
 epic$Religiosite <- epic$Religion_enquete
 epic$Religiosite <- as.factor(epic$Religiosite)
@@ -129,11 +113,11 @@ epic$Religiosite <- fct_recode(epic$Religiosite,
                                "Croyant"="Hindouisme",
                                "Croyant"="Judaïsme",
                                "Croyant"="Autre",
-                               "Non-Croyant"="Sans religion"
-)
+                               "Non-Croyant"="Sans religion")
+
 #------------------------------------------------------------------------------------------
 
-#Trie à plat pour la variable Diplome_eleve_conjoint :
+#Traitement de la variable Diplome_eleve_conjoint :
 
 epic$Diplome_eleve_conjoint <- as.factor(epic$Diplome_eleve_conjoint) #je transforme ma variable en facteur.
 
@@ -147,15 +131,11 @@ epic$Diplome_eleve_conjoint <- fct_recode(epic$Diplome_eleve_conjoint,
                                           "Licence,bac+3, bac+4"="7",
                                           "Master2, doctorat de médecine, pharmacie, odontologie,diplôme grande école bac+5"="8",
                                           "Doctorat de recherche (hors santé)"="9",
-                                          "Ne sait pas"="99"
-                                          
-)
-
-table(epic$Diplome_eleve_conjoint)
+                                          "Ne sait pas"="99")
 
 #------------------------------------------------------------------------------------------
 
-#Trie à plat pour la variable Diplome_eleve_enquete :
+#Traitement de la variable Diplome_eleve_enquete :
 
 epic$Diplome_eleve_enquete <- as.factor(epic$Diplome_eleve_enquete) #je transforme ma variable en facteur.
 
@@ -169,15 +149,11 @@ epic$Diplome_eleve_enquete <- fct_recode(epic$Diplome_eleve_enquete,
                                          "Licence,bac+3, bac+4"="7",
                                          "Master2, doctorat de médecine, pharmacie, odontologie,diplôme grande école bac+5"="8",
                                          "Doctorat de recherche (hors santé)"="9",
-                                         "Ne sait pas"="99"
-                                         
-)
-
-table(epic$Diplome_eleve_enquete)
+                                         "Ne sait pas"="99")
 
 #------------------------------------------------------------------------------------------
 
-#Trie à plat pour la variable Diplome_eleve_enquete :
+#Traitement de la variable Diplome_eleve_enquete :
 
 epic$Statut_profess_conjoint <- as.factor(epic$Statut_profess_conjoint) #je transforme ma variable en facteur.
 
@@ -190,14 +166,11 @@ epic$Statut_profess_conjoint <- fct_recode(epic$Statut_profess_conjoint,
                                            "aide un membre de famille dans son travail, sans être rémunéré"="6",
                                            "Chef d'entreprise salarié, PDG, gérant(e) minoritaire, associé(e)"="7",
                                            "Indépendant(e) ou à votre compte"="8",
-                                           "Ne sait pas"="99"
-)
-
-table(epic$Statut_profess_conjoint)
+                                           "Ne sait pas"="99")
 
 #------------------------------------------------------------------------------------------
 
-#Trie à plat pour la variable Statut_profess_enquete :
+#Traitement de la variable Statut_profess_enquete :
 
 epic$Statut_profess_enquete <- as.factor(epic$Statut_profess_enquete) #je transforme ma variable en facteur.
 
@@ -210,40 +183,31 @@ epic$Statut_profess_enquete <- fct_recode(epic$Statut_profess_enquete,
                                           "aide un membre de famille dans son travail, sans être rémunéré"="6",
                                           "Chef d'entreprise salarié, PDG, gérant(e) minoritaire, associé(e)"="7",
                                           "Indépendant(e) ou à votre compte"="8",
-                                          "Ne sait pas"="99"
-)
-
-table(epic$Statut_profess_enquete)
+                                          "Ne sait pas"="99")
 
 #------------------------------------------------------------------------------------------
 
-#Trie à plat pour la variable Sexe_enquete :
+#Traitement de la variable Sexe_enquete :
 
 epic$Sexe_enquete <- as.factor(epic$Sexe_enquete) #je transforme ma variable en facteur.
 
 epic$Sexe_enquete <- fct_recode(epic$Sexe_enquete,
                                 "Homme"="1",
-                                "Femme"="2",
-)
-
-table(epic$Sexe_enquete)
+                                "Femme"="2")
 
 #------------------------------------------------------------------------------------------
 
-#Trie à plat pour la variable Sexe_conjoint :
+#Traitement de la variable Sexe_conjoint :
 
 epic$Sexe_conjoint <- as.factor(epic$Sexe_conjoint) #je transforme ma variable en facteur.
 
 epic$Sexe_conjoint <- fct_recode(epic$Sexe_conjoint,
                                  "Homme"="1",
-                                 "Femme"="2"
-)
-
-table(epic$Sexe_conjoint)
+                                 "Femme"="2")
 
 #------------------------------------------------------------------------------------------
 
-#Trie à plat pour la variable Accepter_etre_avec_moins_diplome :
+#Traitement de la variable Accepter_etre_avec_moins_diplome :
 
 epic$Accepter_etre_avec_moins_diplome <- as.factor(epic$Accepter_etre_avec_moins_diplome) #je transforme ma variable en facteur.
 
@@ -251,14 +215,11 @@ epic$Accepter_etre_avec_moins_diplome <- fct_recode(epic$Accepter_etre_avec_moin
                                                     "oui, c'est justement mon cas"="1",
                                                     "oui"="2",
                                                     "non"="3",
-                                                    "Ne sait pas"="9"
-)
-
-table(epic$Accepter_etre_avec_moins_diplome)
+                                                    "Ne sait pas"="9")
 
 #------------------------------------------------------------------------------------------
 
-#Trie à plat pour la variable Accepter_etre_avec_plus_diplome :
+#Traitement de la variable Accepter_etre_avec_plus_diplome :
 
 epic$Accepter_etre_avec_plus_diplome <- as.factor(epic$Accepter_etre_avec_plus_diplome) #je transforme ma variable en facteur.
 
@@ -266,7 +227,4 @@ epic$Accepter_etre_avec_plus_diplome <- fct_recode(epic$Accepter_etre_avec_plus_
                                                    "oui, c'est justement mon cas"="1",
                                                    "oui"="2",
                                                    "non"="3",
-                                                   "Ne sait pas"="9"
-)
-
-table(epic$Accepter_etre_avec_plus_diplome)
+                                                   "Ne sait pas"="9")
