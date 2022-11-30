@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #1- Nous allons pouvoir faire un comparatif de 10 ans vis à vis de la population religieuse. 
 #2- Nous ferons également un comparatif entre homme et femmes, religieux.ses entre 2003 et 2013, puis dans son ensemble.
 
-```{r, echo=False}
+```{r, include=FALSE}
 library(foreign)
 library(questionr)
 library(survey)
@@ -36,26 +36,26 @@ library(tinytex)
 ##La base de donnees HDV était en 4 parties, 
 ##nous avons ouvert la premiere et la quatrieme...
 
-```{r, echo=False}
+```{r, include=FALSE}
 hdv1<-read.dbf("hdv1.dbf")
 hdv4<-read.dbf("hdv4.dbf")
 ```
 
 ##...pour récuperer les variables qui nous interressent.
 
-```{r, echo=False}
+```{r, include=FALSE}
 hdv <- cbind(select(hdv1, c(AGEE,AGECJ)), select(hdv4, c(STATUTE,STATUTCJ,NIVE2TE,NIVE2TCJ,QUALIFE,QUALCJ,SEXEE,SEXECJ,VRELIG,VENREL,VIECOUE)))
 ```
 
 ## Puis nous nettoyons notre environnement
 
-```{r, echo=False}
+```{r, include=FALSE}
 rm(hdv1,hdv4)
 ```
 
 #appeler la script Recodage contenant les traitements des variables de la base hdv:
 
-```{r, echo=False}
+```{r, include=FALSE}
 source("recodage_hdv2003.R")
 ```
 
@@ -75,20 +75,20 @@ str(hdv)
 
 #appeler le script exploration de données :
 
-```{r, echo=False}
+```{r, include=FALSE}
 source("exploration_hdv2003.R")
 ```
 
 ## Pour la base EPIC, nous avons ouvert la base de donnees EPIC pour y recuperer ce qu'il nous faut :
 
-```{r, echo=False}
+```{r, include=FALSE}
 epic <- select(read.csv("repondant.txt", sep="\t"),
                c(IndCOU,R_IMPREL,R_RELIGC,R_RELIGION,C_DIPLOMEC,M_DIPLOME,C_STATUTC,M_STATUT,SEXER,H_SEXEC_C,AGEM,H_ANAISC_C,R_MOINDIPL,R_PLUDIPL))
 ```
 
 #appeler la script Recodage contenant les traitements des variables de la base epic:
 
-```{r, echo=False}
+```{r, include=FALSE}
 source("recodage_epic.R")
 ```
 
