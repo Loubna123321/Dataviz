@@ -6,41 +6,41 @@
 
 #IndCOU: Indicateur de relation amoureuse importante lors de l'enquête
 #R_IMPREL: Importance de la religion pour l'enquêté
-#R_RELIGC :Religion du conjoint
-#R_RELIGION:Religion de l'enquêté
+#R_RELIGC: Religion du conjoint
+#R_RELIGION: Religion de l'enquêté
+#Variable construite: Religiosité
 
-#C_DIPLOMEC :Diplôme le plus élevé du conjoint
-#M_DIPLOME :Diplôme le plus élevé de l'enquêté
+#C_DIPLOMEC: Diplôme le plus élevé du conjoint
+#M_DIPLOME: Diplôme le plus élevé de l'enquêté
 
-#C_STATUTC :Statut professionnel du conjoint
-#M_STATUT:Statut professionnel de l'enquêté
+#C_STATUTC: Statut professionnel du conjoint
+#M_STATUT: Statut professionnel de l'enquêté
 
-#SEXER  :Sexe de l'enquêté   
-#H_SEXEC_C :Relation actuelle : Sexe du conjoint
+#SEXER: Sexe de l'enquêté   
+#H_SEXEC_C: Relation actuelle : Sexe du conjoint
 
-#AGEM:Age de l'individu (en différence de millésime)
-#H_ANAISC_C:Relation actuelle : Année de naissance du conjoint
-#R_MOINDIPL:Accepter l'idée d'être avec quelqu'un de nettement moins diplômé
-#R_PLUDIPL :Accepter l'idée d'être avec quelqu'un de nettement plus diplômé
+#AGEM: Age de l'individu (en différence de millésime)
+#H_ANAISC_C: Relation actuelle : Année de naissance du conjoint
+#R_MOINDIPL: Accepter l'idée d'être avec quelqu'un de nettement moins diplômé
+#R_PLUDIPL: Accepter l'idée d'être avec quelqu'un de nettement plus diplômé
 
 
 #------------------------------------------------------------------------------------------
 
-
-names(epic)[1]<-'Indic_relation_amour'
-names(epic)[2]<-'Importance_religion_enquete'
-names(epic)[3]<-'Religion_conjoint'
-names(epic)[4]<-'Religion_enquete'
-names(epic)[5]<-'Diplome_eleve_conjoint'
-names(epic)[6]<-'Diplome_eleve_enquete'
-names(epic)[7]<-'Statut_profess_conjoint'
-names(epic)[8]<-'Statut_profess_enquete'
-names(epic)[9]<-'Sexe_enquete'
-names(epic)[10]<-'Sexe_conjoint'
-names(epic)[11]<-'Age_individu'
-names(epic)[12]<-'Annee_naissance_conjoint'
-names(epic)[13]<-'Accepter_etre_avec_moins_diplome'
-names(epic)[14]<-'Accepter_etre_avec_plus_diplome'
+names(epic)<-c('Indic_relation_amour',
+               'Importance_religion_enquete',
+               'Religion_conjoint',
+               'Religion_enquete',
+               'Diplome_eleve_conjoint',
+               'Diplome_eleve_enquete',
+               'Statut_profess_conjoint',
+               'Statut_profess_enquete',
+               'Sexe_enquete',
+               'Sexe_conjoint',
+               'Age_individu',
+               'Annee_naissance_conjoint',
+               'Accepter_etre_avec_moins_diplome',
+               'Accepter_etre_avec_plus_diplome')
 
 #------------------------------------------------------------------------------------------
 
@@ -71,9 +71,6 @@ epic$Importance_religion_enquete <- fct_recode(epic$Importance_religion_enquete,
 table(epic$Importance_religion_enquete)
 #------------------------------------------------------------------------------------------
 
-
-
-
 #Religion_conjoint:
 
 #Trie à plat pour la variable Indic_relation_amour :
@@ -98,8 +95,6 @@ table(epic$Religion_conjoint)
 
 #------------------------------------------------------------------------------------------
 
-
-
 #Trie à plat pour la variable Religion_enquete :
 
 epic$Religion_enquete <- as.factor(epic$Religion_enquete) #je transforme ma variable en facteur.
@@ -121,7 +116,22 @@ table(epic$Religion_enquete)
 
 #------------------------------------------------------------------------------------------
 
+#Construction de la variable Religiosite :
 
+epic$Religiosite <- epic$Religion_enquete
+epic$Religiosite <- as.factor(epic$Religiosite)
+
+epic$Religiosite <- fct_recode(epic$Religiosite,
+                               "Croyant"="Catholicisme",
+                               "Croyant"="Protestantisme",
+                               "Croyant"="Islam",
+                               "Croyant"="Bouddhisme",
+                               "Croyant"="Hindouisme",
+                               "Croyant"="Judaïsme",
+                               "Croyant"="Autre",
+                               "Non-Croyant"="Sans religion"
+)
+#------------------------------------------------------------------------------------------
 
 #Trie à plat pour la variable Diplome_eleve_conjoint :
 
@@ -143,11 +153,7 @@ epic$Diplome_eleve_conjoint <- fct_recode(epic$Diplome_eleve_conjoint,
 
 table(epic$Diplome_eleve_conjoint)
 
-
 #------------------------------------------------------------------------------------------
-
-
-
 
 #Trie à plat pour la variable Diplome_eleve_enquete :
 
@@ -171,8 +177,6 @@ table(epic$Diplome_eleve_enquete)
 
 #------------------------------------------------------------------------------------------
 
-
-#Statut_profess_conjoint:
 #Trie à plat pour la variable Diplome_eleve_enquete :
 
 epic$Statut_profess_conjoint <- as.factor(epic$Statut_profess_conjoint) #je transforme ma variable en facteur.
@@ -192,8 +196,6 @@ epic$Statut_profess_conjoint <- fct_recode(epic$Statut_profess_conjoint,
 table(epic$Statut_profess_conjoint)
 
 #------------------------------------------------------------------------------------------
-
-
 
 #Trie à plat pour la variable Statut_profess_enquete :
 
@@ -215,8 +217,6 @@ table(epic$Statut_profess_enquete)
 
 #------------------------------------------------------------------------------------------
 
-
-
 #Trie à plat pour la variable Sexe_enquete :
 
 epic$Sexe_enquete <- as.factor(epic$Sexe_enquete) #je transforme ma variable en facteur.
@@ -228,10 +228,7 @@ epic$Sexe_enquete <- fct_recode(epic$Sexe_enquete,
 
 table(epic$Sexe_enquete)
 
-
 #------------------------------------------------------------------------------------------
-
-
 
 #Trie à plat pour la variable Sexe_conjoint :
 
@@ -245,8 +242,6 @@ epic$Sexe_conjoint <- fct_recode(epic$Sexe_conjoint,
 table(epic$Sexe_conjoint)
 
 #------------------------------------------------------------------------------------------
-
-
 
 #Trie à plat pour la variable Accepter_etre_avec_moins_diplome :
 
@@ -262,10 +257,6 @@ epic$Accepter_etre_avec_moins_diplome <- fct_recode(epic$Accepter_etre_avec_moin
 table(epic$Accepter_etre_avec_moins_diplome)
 
 #------------------------------------------------------------------------------------------
-
-
-
-
 
 #Trie à plat pour la variable Accepter_etre_avec_plus_diplome :
 
