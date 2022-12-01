@@ -7,8 +7,8 @@
 #R_RELIGION: Religion de l'enquêté
 #Variable construite: Religiosité
 
-#C_DIPLOMEC: Diplôme le plus élevé du conjoint
-#M_DIPLOME: Diplôme le plus élevé de l'enquêté
+#C_CS13C: Catégorie socioprofessionnelle du conjoint
+#M_CS13: Catégorie socioprofessionnelle de l'enquêté 
 
 #C_STATUTC: Statut professionnel du conjoint
 #M_STATUT: Statut professionnel de l'enquêté
@@ -153,37 +153,47 @@ epic$Diplome_eleve_enquete <- fct_recode(epic$Diplome_eleve_enquete,
 
 #------------------------------------------------------------------------------------------
 
-#Traitement de la variable Diplome_eleve_enquete :
+#Traitement de la variable CSP_conjoint :
 
-epic$Statut_profess_conjoint <- as.factor(epic$Statut_profess_conjoint) #je transforme ma variable en facteur.
+epic$CSP_conjoint <- as.factor(epic$CSP_conjoint)
 
-epic$Statut_profess_conjoint <- fct_recode(epic$Statut_profess_conjoint,
-                                           "Salarié(e) de l'État"="1",
-                                           " Salarié(e) d'une collectivité territoriale "="2",
-                                           "Salarié(e) des hôpitaux publics"= "3",
-                                           "Salarié(e) d' entreprise, d'artisan, d'association"="4",
-                                           "Salarié(e) d'un ou plusieurs particulier"="5",
-                                           "aide un membre de famille dans son travail, sans être rémunéré"="6",
-                                           "Chef d'entreprise salarié, PDG, gérant(e) minoritaire, associé(e)"="7",
-                                           "Indépendant(e) ou à votre compte"="8",
-                                           "Ne sait pas"="99")
+epic$CSP_conjoint <- fct_recode(epic$CSP_conjoint,
+                               "Agriculteurs"="1",
+                               "Artisans, commerçants, chefs d'entreprise"="2",
+                               "Cadres des entreprises"="3",
+                               "Professions intellectuelles, cadres supérieurs du public, professions libérales"="4",
+                               "Professions intermédiaires de l'enseignement du public"="5",
+                               "Professions intermédiaires de la santé et du travail social"="6",
+                               "Professions intermédiaires des entreprises"="7",
+                               "Employés bureau et secteur public"="8",
+                               "Employés commerce et services"="9",
+                               "Ouvriers qualifiés"="10",
+                               "Ouvriers non qualifiés"="11",
+                               "Au foyer"="12",
+                               "En études"="13",
+                               "Ne sait pas"="99")
 
 #------------------------------------------------------------------------------------------
 
-#Traitement de la variable Statut_profess_enquete :
+#Traitement de la variable CSP_enquete :
 
-epic$Statut_profess_enquete <- as.factor(epic$Statut_profess_enquete) #je transforme ma variable en facteur.
+epic$CSP_enquete <- as.factor(epic$CSP_enquete) #je transforme ma variable en facteur.
 
-epic$Statut_profess_enquete <- fct_recode(epic$Statut_profess_enquete,
-                                          "Salarié(e) de l'État"="1",
-                                          " Salarié(e) d'une collectivité territoriale "="2",
-                                          "Salarié(e) des hôpitaux publics"= "3",
-                                          "Salarié(e) d' entreprise, d'artisan, d'association"="4",
-                                          "Salarié(e) d'un ou plusieurs particulier"="5",
-                                          "aide un membre de famille dans son travail, sans être rémunéré"="6",
-                                          "Chef d'entreprise salarié, PDG, gérant(e) minoritaire, associé(e)"="7",
-                                          "Indépendant(e) ou à votre compte"="8",
-                                          "Ne sait pas"="99")
+epic$CSP_enquete <- fct_recode(epic$CSP_enquete,
+                                             "Agriculteurs"="1",
+                                             "Artisans, commerçants, chefs d'entreprise"="2",
+                                             "Cadres des entreprises"="3",
+                                             "Professions intellectuelles, cadres supérieurs du public, professions libérales"="4",
+                                             "Professions intermédiaires de l'enseignement du public"="5",
+                                             "Professions intermédiaires de la santé et du travail social"="6",
+                                             "Professions intermédiaires des entreprises"="7",
+                                             "Employés bureau et secteur public"="8",
+                                             "Employés commerce et services"="9",
+                                             "Ouvriers qualifiés"="10",
+                                             "Ouvriers non qualifiés"="11",
+                                             "Au foyer"="12",
+                                             "En études"="13",
+                                             "Ne sait pas"="99")
 
 #------------------------------------------------------------------------------------------
 
