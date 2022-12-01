@@ -17,7 +17,7 @@ hdv <- cbind(select(hdv1, c(AGEE,AGECJ)), select(hdv4, c(STATUTE,STATUTCJ,NIVE2T
 rm(hdv1,hdv4)
 
 ## Pour EPIC, nous avons ouvert la base de données EPIC pour y recuperer ce qu'il nous faut :
-epic <- select(read.csv("repondant.txt", sep="\t"),c(IndCOU,R_IMPREL,R_RELIGC,R_RELIGION,C_DIPLOMEC,M_DIPLOME,C_STATUTC,M_STATUT,SEXER,H_SEXEC_C,AGEM,H_ANAISC_C,R_MOINDIPL,R_PLUDIPL))
+epic <- select(read.csv("repondant.txt", sep="\t"),c(IndCOU,R_IMPREL,R_RELIGC,R_RELIGION,C_DIPLOMEC,M_DIPLOME,C_CS13C,M_CS13,SEXER,H_SEXEC_C,AGEM,H_ANAISC_C,R_MOINDIPL,R_PLUDIPL))
 
 ##1. Population religieuse 
 
@@ -194,6 +194,3 @@ freq(hdv$VRELIG)# Valeurs en %
 
 
 table(hdv$VRELIG,hdv$SEXEE)#Croiser 2 var
-
-esquisser(hdv)
-
