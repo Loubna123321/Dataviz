@@ -46,7 +46,7 @@ epic$Indic_relation_amour <- as.factor(epic$Indic_relation_amour) #je transforme
 
 epic$Indic_relation_amour <- fct_recode(epic$Indic_relation_amour,
                                         "Autre situation"="0",
-                                        "relation amoureuse ou en couple "="1")
+                                        "relation amoureuse ou en couple"="1")
 
 #------------------------------------------------------------------------------------------
 
@@ -56,7 +56,7 @@ epic$Importance_religion_enquete <- as.factor(epic$Importance_religion_enquete) 
 
 epic$Importance_religion_enquete <- fct_recode(epic$Importance_religion_enquete,
                                                "Importante ou assez importante"="1",
-                                               "Peu importante "="2",
+                                               "Peu importante"="2",
                                                "Sans importance"= "3",
                                                "Ne souhaite pas répondre"="8")
 
@@ -68,7 +68,7 @@ epic$Religion_conjoint <- as.factor(epic$Religion_conjoint) #je transforme ma va
 
 epic$Religion_conjoint <- fct_recode(epic$Religion_conjoint,
                                      "Catholicisme"="1",
-                                     "Protestantisme "="2",
+                                     "Protestantisme"="2",
                                      "Islam"= "3",
                                      "Bouddhisme"="4",
                                      "Hindouisme"="5",
@@ -86,7 +86,7 @@ epic$Religion_enquete <- as.factor(epic$Religion_enquete) #je transforme ma vari
 
 epic$Religion_enquete <- fct_recode(epic$Religion_enquete,
                                     "Catholicisme"="1",
-                                    "Protestantisme "="2",
+                                    "Protestantisme"="2",
                                     "Islam"= "3",
                                     "Bouddhisme"="4",
                                     "Hindouisme"="5",
@@ -120,11 +120,11 @@ epic$Diplome_eleve_conjoint <- as.factor(epic$Diplome_eleve_conjoint) #je transf
 
 epic$Diplome_eleve_conjoint <- fct_recode(epic$Diplome_eleve_conjoint,
                                           "Aucun diplôme"="1",
-                                          " primaires "="2",
+                                          "Primaires"="2",
                                           "Brevet collèges ou élémentaire"= "3",
                                           "CAP, BEP"="4",
                                           "Baccalauréat ou brevet supérieur"="5",
-                                          "BTS, DEUG, DEUST,niveau bac+2,"="6",
+                                          "BTS, DEUG, DEUST,niveau bac+2"="6",
                                           "Licence,bac+3, bac+4"="7",
                                           "Master2, doctorat de médecine, pharmacie, odontologie,diplôme grande école bac+5"="8",
                                           "Doctorat de recherche (hors santé)"="9",
@@ -138,11 +138,11 @@ epic$Diplome_eleve_enquete <- as.factor(epic$Diplome_eleve_enquete) #je transfor
 
 epic$Diplome_eleve_enquete <- fct_recode(epic$Diplome_eleve_enquete,
                                          "Aucun diplôme"="1",
-                                         " primaires "="2",
+                                         "Primaires"="2",
                                          "Brevet collèges ou élémentaire"= "3",
                                          "CAP, BEP"="4",
                                          "Baccalauréat ou brevet supérieur"="5",
-                                         "BTS, DEUG, DEUST,niveau bac+2,"="6",
+                                         "BTS, DEUG, DEUST,niveau bac+2"="6",
                                          "Licence,bac+3, bac+4"="7",
                                          "Master2, doctorat de médecine, pharmacie, odontologie,diplôme grande école bac+5"="8",
                                          "Doctorat de recherche (hors santé)"="9",
