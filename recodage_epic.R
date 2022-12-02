@@ -10,9 +10,6 @@
 #C_CS13C: Catégorie socioprofessionnelle du conjoint
 #M_CS13: Catégorie socioprofessionnelle de l'enquêté 
 
-#C_STATUTC: Statut professionnel du conjoint
-#M_STATUT: Statut professionnel de l'enquêté
-
 #SEXER: Sexe de l'enquêté   
 #H_SEXEC_C: Relation actuelle : Sexe du conjoint
 
@@ -32,8 +29,8 @@ names(epic)<-c('Indic_relation_amour',
                'Religion_enquete',
                'Diplome_eleve_conjoint',
                'Diplome_eleve_enquete',
-               'Statut_profess_conjoint',
-               'Statut_profess_enquete',
+               'CSP_conjoint',
+               'CSP_enquete',
                'Sexe_enquete',
                'Sexe_conjoint',
                'Age_individu',
