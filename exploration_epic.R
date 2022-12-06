@@ -69,16 +69,16 @@ freq(epic$Diplome_eleve_enquete)
 #---------------------------------------------------------------------------------------------------------------
 
 
-addmargins(table(epic$Statut_profess_conjoint)) 
+addmargins(table(epic$CSP_conjoint)) 
 
-freq(epic$Statut_profess_conjoint)
+freq(epic$CSP_conjoint)
 
 #---------------------------------------------------------------------------------------------------------------
 
 
-addmargins(table(epic$Statut_profess_enquete)) 
+addmargins(table(epic$CSP_enquete)) 
 
-freq(epic$Statut_profess_enquete)
+freq(epic$CSP_enquete)
 
 #---------------------------------------------------------------------------------------------------------------
 

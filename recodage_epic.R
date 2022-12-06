@@ -97,23 +97,6 @@ epic$Religion_enquete <- fct_recode(epic$Religion_enquete,
 
 #------------------------------------------------------------------------------------------
 
-#Construction et traitement de la variable Religiosite :
-
-epic$Religiosite <- epic$Religion_enquete
-epic$Religiosite <- as.factor(epic$Religiosite)
-
-epic$Religiosite <- fct_recode(epic$Religiosite,
-                               "Croyant"="Catholicisme",
-                               "Croyant"="Protestantisme",
-                               "Croyant"="Islam",
-                               "Croyant"="Bouddhisme",
-                               "Croyant"="Hindouisme",
-                               "Croyant"="Judaïsme",
-                               "Croyant"="Autre",
-                               "Non-Croyant"="Sans religion")
-
-#------------------------------------------------------------------------------------------
-
 #Traitement de la variable Diplome_eleve_conjoint :
 
 epic$Diplome_eleve_conjoint <- as.factor(epic$Diplome_eleve_conjoint) #je transforme ma variable en facteur.
