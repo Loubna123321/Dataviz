@@ -82,8 +82,7 @@ str(hdv) # Description des variables
 #appeler le script exploration de donn?es :
 
 source("exploration_hdv2003.R")
-##### appel du fichier Sokhna_hdv.R pour la création d'une nouvelle variable dans la base hdv
-source("sokhna_hdv.R")
+
 
 ## Pour la base EPIC, nous avons ouvert la base de donnees EPIC pour y recuperer ce qu'il nous faut :
 
