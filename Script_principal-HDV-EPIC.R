@@ -17,50 +17,51 @@ library(funModeling)
 library(missForest)
 library(dplyr)
 library(tinytex)
-library(ggplot2)
+#library(ggplot2)
 
 
 #Exploration et nettoyage de la base HDV2003: 
 
 ##La base de donn?es HDV ?tant en 4 parties, 
 ##nous avons ouvert la premiere et la quatrieme...
-hdv1<-read.csv("hdv1.csv")
-hdv4<-read.csv("hdv4.csv")
+hdv1<-read.csv2("hdv1.csv")
+hdv4<-read.csv2("hdv4.csv")
 
-##...pour r?cup?rer les variables qui nous interressent.
-hdv <- cbind(select(hdv1, c(AGEE,AGECJ)), select(hdv4, c(STATUTE,STATUTCJ,NIVE2TE,NIVE2TCJ,QUALIFE,QUALCJ,SEXEE,SEXECJ,VRELIG,VENREL,VIECOUE)))
+# Voir le nom des colonnes
+colnames(hdv1)
+
+
+hdv1_select <- select(hdv1, c(AGEE,AGECJ))
+hdv4_select <- select(hdv4, c(STATUTE,STATUTCJ,NIVE2TE,NIVE2TCJ,QUALIFE,QUALCJ,SEXEE,SEXECJ,VRELIG,VENREL,VIECOUE))
+
+##...pour r?cup?rer les variables qui nous interressent via la fonction cbin qui permet de concaténer les deux BD
+hdv <- cbind(hdv1_select, hdv4_select)
 
 ## Puis nous nettoyons notre environnement
 rm(hdv1,hdv4)
 
 #appeler la script Recodage contenant les traitements des variables de la base hdv:
-
 source("recodage_hdv2003.R")
 
-#representer les donn?es: 
-
+#Affichage des 05 premiéres 
 head(hdv)
 
 #les dimensions de la base hdv:
-
-dim(hdv)
-describe(hdv)
-str(hdv)
+dim(hdv) # Nombre de colonnes et nombre de lignes
+describe(hdv) # Statistiques sur ta bases de données
+str(hdv) # Description des variables 
 
 #appeler le script exploration de donn?es :
 
 source("exploration_hdv2003.R")
+##### appel du fichier Sokhna_hdv.R pour la création d'une nouvelle variable dans la base hdv
+source("sokhna_hdv.R")
 
 ## Pour la base EPIC, nous avons ouvert la base de donnees EPIC pour y recuperer ce qu'il nous faut :
 
 epic <- select(read.csv("repondant.txt", sep="\t"),
                c(IndCOU,R_IMPREL,R_RELIGC,R_RELIGION,C_DIPLOMEC,M_DIPLOME,C_CS13C,M_CS13,SEXER,H_SEXEC_C,AGEM,H_ANAISC_C,R_MOINDIPL,R_PLUDIPL))
 
-#appeler la script Recodage contenant les traitements des variables de la base epic:
-
-source("recodage_epic.R")
-
-#Representer les donn?es :
 
 head(epic)
 
@@ -94,7 +95,7 @@ epic$Religiosite <- fct_recode(epic$Religiosite,
                                "Croyant"="Islam",
                                "Croyant"="Bouddhisme",
                                "Croyant"="Hindouisme",
-                               "Croyant"="JudaÃ¯sme",
+                               "Croyant"="Judaïsme",
                                "Croyant"="Autre",
                                "Non-Croyant"="Sans religion")
 
@@ -118,7 +119,7 @@ hdv$Religiosite <- hdv$Rapport_religion
 hdv$Religiosite <- as.factor(hdv$Religiosite) 
 
 hdv$Religiosite <- fct_recode(hdv$Religiosite,
-                              "Croyant"="Pratique rÃ©guliere",
+                              "Croyant"="Pratique réguliere ",
                               "Croyant"="Pratique occasionnelle",
                               "Croyant"="Sentiment d'appartenance sans pratique",
                               "Non croyant"="Ni pratique ni appartenance",
@@ -159,21 +160,11 @@ data_reg
 
 
 ggplot(epic) +
-  aes(x=Religion_enquete,y = ..prop..,group = 1,fill= ..prop..)+
+  aes(y=Religion_enquete,x = ..prop..,group = 1,fill= ..prop..)+
   geom_bar() +
   labs(title = "Types de religion en France en 2013",
        y="pourcentage") +
   theme_bw()
-
-
-##Analyse 1.b 
-
-##En 2013, la religion la plus pratiqu?e en France est le catholocisme, avec plus de 60%. 
-#Nous pouvons dire que plus de la moiti? des Francais sont catholiques. 
-## L'islam est la deuxi?me religion la plus pratiqu?e en France en 2013, avec plus de 6%
-
-
-
 
 ###############################Loubna###########################:
 #Dans cette partie, nous allons analyser les personnes en couple en fonction de leur r?ligionisit? en 2003, puis en 2013
@@ -185,8 +176,6 @@ ggplot(epic) +
 #2.a)R?partition des personnes en couples en fonction de la religiosit?:
 
 #Voyons en premier temps la r?partition des personnes en couple:
-
-
 ggplot(hdv) +
   aes(x = Vie_en_couple) +
   geom_bar(fill = "#0C4C8A") +
@@ -330,24 +319,63 @@ epic %>%
 
 
 ###############################Mbathio###########################:
+### nous allons créer une nouvelle variable qui nous permettra de voir s'il ya un homogamie de diplome
+hdv$meme_diplome <- ifelse(as.character(hdv$Niveau_etude_conjoint) == as.character(hdv$Niveau_etude_enquete), "YES", "NO")
+
+### nous allons créer une variable qui nous permettra de voir si il y'a un homogamie de diplome. 
+epic$meme_diplome <- ifelse(as.character(epic$Diplome_eleve_conjoint) == as.character(epic$Diplome_eleve_enquete), "YES", "NO")
 
 
-table(epic$C_DIPLOME)
-##je vais crois?e la variable religiosit? davec le M_DIPLOME pour voir si la r?ligion de l'enqu?t? ? un rapport avec son niveau de diplome 
-##tableau trie a plat 
-table(epic$C_DIPLOME,epic$Religiositere)
-table(epic$M_DIPLOME,epic$Religiositere)
 
-tab<-table(epic$M_DIPLOME,epic$Religiositere)
-lprop(tab)
-mosaicplot(tab)
+#### Homogamie et religion 
+#Representation de l'homogamie en fonction de l'appartenance à une religion.
+freq(epic$meme_diplome)
+
+
+table(epic$meme_diplome)
+data_reg <-data.frame(table(epic$meme_diplome))
+data_reg
+
+
+ggplot(epic) +
+  aes(y=meme_diplome,x = ..prop..,group = 1,fill= ..prop..)+
+  geom_bar() +
+  labs(title = "Meme diplome",
+       y="pourcentage") +
+  theme_bw()
+
+##Analyse 1.b 
+
+##En 2013, la religion la plus pratiqu?e en France est le catholocisme, avec plus de 60%. 
+#Nous pouvons dire que plus de la moiti? des Francais sont catholiques. 
+## L'islam est la deuxi?me religion la plus pratiqu?e en France en 2013, avec plus de 6%
+
+
+
+table(epic$meme_diplome)
+##je vais croiser la variable religiosité davec meme diplome pour voir si les personnes qui se déclarent religieuses, portent moins d'attention à l'homogamie de diplome
+##tableau trie a plat ( tableau de contingence)
+tab_epic = table(epic$meme_diplome,epic$Religiosite)
+tab_hdv = table(hdv$meme_diplome,hdv$Religiosite)
+####nous avons constaté que les personnes qui se déclarent croyants porte moins attentions à l'homogamie de diplome(73.3) que les non croyant(25.4)
+lprop(tab_epic)
+lprop(tab_hdv)
+mosaicplot(tab_epic)
+library(ggmosaic)
+
+ggplot(data = epic) +
+  geom_mosaic(aes(x = product(meme_diplome, Religiosite), fill = Religiosite, na.rm = TRUE)) +
+  xlab("") + ylab("") +
+  theme(legend.position = "bottom")
+
+ggplot(data = hdv) +
+  geom_mosaic(aes(x = product(meme_diplome, Religiosite), fill = Religiosite, na.rm = TRUE)) +
+  xlab("") + ylab("") +
+  theme(legend.position = "bottom")
 ##le tableau nous montre que les individue qui croient au catholisisme semble avoir le Brevet des colleges,BEPC,brevet ?l?mentaire,DNB ou dipl?me ?trangers de meme niveau comme dipl?me le plus ?lev? (64.8).
 
 
-
-
 ###############################Emmanuel###########################:
-
 
 ## Homogamie et religion 
 #Repr?sentation de l'homogamie en fonction de l'appartenance ? une religion.
