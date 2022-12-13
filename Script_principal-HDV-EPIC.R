@@ -1,10 +1,38 @@
 
-##1. Population religieuse 
+######Introduction#####
 
-#Ici nous allons bri?vement repr?senter la population religieuse en France en 2003 (HDV) et en 2013 (EPIC) avec 2 questions. 
+#Les sciences sociales, se sont depuis longtemps interessées à l'homogamie dans la mise en couple. 
+#L'homogamie est défini par M. Bouchet-Valat et S. Grobon comme ''l'appartenance des deux conjoints à la même catégorie'' (M. Bouchet-Valat & S. Grobon, (2019). Homogames un jour, homogames toujours ? Rencontre pendant les études et proximité de diplôme et de carrière au sein des couple en France, p.137). 
+#Ils entendent par même catégorie le fait d'appartenir à la même classe sociale d'origine ainsi que d'avoir le même niveau de diplome, ou proche.
+#Nous savons donc que la mise en couple est dans une grande majorité basé sur une ressemblance assez proche des individus en terme de classe sociale et d'éducation, ainsi que de niveau de diplome. 
+# Toutefois, nous les écrits sociologiques sur la représentation de l'homogamie en fonction de la religion sont assez rescents. 
+#Nous pouvons tout de même retrouver un écrit de M. Maudet, intitulé 'Si l'amour rend aveugle, la religion lui redonne la vue'(2021), qui s'interesse à l'homogamie religieuse en France. 
+#L'homogamie religieuse est définie par M. Maudet comme "le fait d'appartenir au même groupe religieux/non religieux que son ou sa conjoint.e" (2021, p.2).
 
-#1- Nous allons pouvoir faire un comparatif de 10 ans vis ? vis de la population religieuse. 
-#2- Nous ferons ?galement un comparatif entre homme et femmes, religieux.ses entre 2003 et 2013, puis dans son ensemble.
+#C'est pourquoi, dans le cadre de ce devoir, nous allons à partir de deux bases de données, s'interesser à l'homogamie générale des couples en France en 2003 et 2013. Puis nous allons nous plus particulirement s'attarder sur l'homogamie religieuse en 2003 et 2013. 
+
+######Présentation des bases de données#####
+
+##Présentation de l’enquête EPIC  
+#L’enquête Étude des Parcours Individuels et Conjugaux (Epic), est la continuité d’un ensemble d’enquête réalisé entre les années 50 et 90, sur les situations matrimoniales. Nous avons l’enquête « Le choix du conjoint » de 1959, ainsi que « La formation des couples » de 1983-1984. 
+#L’enquête EPIC a été réalisé en 2013-2014 par l’Institut national d’études démographiques (Ined) et l’Institut national de la statistique et des études économiques (Insee). Le but de cette enquête était de mettre en lumière les différentes manières de mise en couple et de comprendre l’ensemble de ses aspects. De plus, l’enquête EPIC a été l’une des premières à s’intéresser et à intégrer des personnes célibataires dans son étude. 
+#Cette enquête a été effectué sur la base d’un tirage au sort d’un échantillon de la population. Parmi celui-ci, 16 000 logements ont été retenus et 7825 entretiens ont été exécuter auprès de personnes âgées de 26 à 65 ans.  
+
+##Présentation de l’enquête HDV  
+#L’enquête Histoire de Vie est également dans la continuité d’une enquête réalisé en 1992, intitulé « Mobilité géographique et Insertion sociale (MGIS). 
+#L’enquête HDV a vu le jour en 2003, mise sur pied par l’Institut national de la statistique et des études économiques (Insee). Cette enquête porte sur la construction des identités en y comprenant le plus grand nombre d’aspect que comprend la vie sociale. 
+#L’enquête HDV a été réalisé auprès de 8403 personnes habitants en France métropolitaine, âgés de 18 ans et plus. 
+
+
+######Plan######
+
+#Ce devoir sera divisé en 2 parties. 
+#Dans une première partie nous introduirons brièvement la population religieuse/non religieuse en France en 2003 et 2013. 
+#Dans une deuxième partie, nous nous interesserons à l'homogamie générale puis religiseuse en France, avec un comparatif de 10ans. 
+#Cette partie sera divisé en 3, en passant par l'analyse des couples en fonction de leur religion, de leur diplome, puis enfin leur homogamie.
+
+
+
 library(foreign)
 library(questionr)
 library(survey)
@@ -166,11 +194,20 @@ ggplot(epic) +
        y="pourcentage") +
   theme_bw()
 
+
+##Analyse 1.b 
+
+##En 2013, la religion la plus pratiqu?e en France est le catholocisme, avec plus de 60%. 
+#Nous pouvons dire que plus de la moiti? des Francais sont catholiques. 
+## L'islam est la deuxi?me religion la plus pratiqu?e en France en 2013, avec plus de 6%
+
+
+
 ###############################Loubna###########################:
-#Dans cette partie, nous allons analyser les personnes en couple en fonction de leur r?ligionisit? en 2003, puis en 2013
-#Ensuite, nous allons pouvoir comparer les deux cas.
-#En plus, nous allons analyser l'age en fonction de la r?ligionisit? en 2003, puis en 2013
-#Ensuite, nous allons pouvoir comparer les deux cas.
+#Dans cette partie, nous allons analyser les personnes en couple en fonction de leur r?ligionisit? en 2003, puis en 2013.
+#Puis, nous allons pouvoir comparer ces deux cas.
+#Par la suite, nous allons analyser l'age en fonction de la r?ligionisit? en 2003, puis en 2013.
+#Puis, nous allons pouvoir comparer ces deux cas.
 
 
 #2.a)R?partition des personnes en couples en fonction de la religiosit?:
@@ -182,7 +219,7 @@ ggplot(hdv) +
   labs(title = "Vie en couple") +
   theme_bw()
 
-#On remarque que les personnes en couple sont presque deux foix plus les personnes qui ne sont pas en couple!
+#Nous pouvons remarquer que les personnes en couple sont pres de deux foix plus les personnes célibataires.
 
 #R?partition des personnes en couples en fonction de la religiosit? en 2003 :
 
@@ -196,8 +233,8 @@ hdv %>%
   theme_bw() +
   facet_wrap(vars(Vie_en_couple))
 
-#En 2003: l'?chantillon des gens r?ligieux (en couple) d?passe 4000 personnes alors que l'?chantillon des gens non-r?ligieux (en couple)
-#est presque de 1400 personnes
+#En 2003 nous pouvons remarquer que l'échantillon des personnes religieuses et en couple dépasse 4000. Tandis que l'échantillon des personnes non religieuses et en couple est de 1400.
+
 
 #R?partition des personnes en couples en fonction de la religiosit? en 2013 :
 
@@ -214,18 +251,17 @@ epic %>%
   theme_bw() +
   facet_wrap(vars(Indic_relation_amour))
 
-#En 2013: l'?chantillon des gens r?ligieux en couple ou en relation d?passe 4000 personnes ?galement, alors que l'?chantillon des 
-#gens non-r?ligieux et ne sont pas en couple est presque de 1500 personnes.
+#En 2013, l'?chantillon des personnes religieuses et en couple (ou en relation) dépasse 4000. Tandis que l'échantillon des 
+#personnes non religieuses et non en couple est presque de 1500 personnes.
 
 #Analyse:
-#Nous pouvons remarquer que la pourcentage des personnes croyants en couple interrog?s en 2003 n'a presque pas modifi?e 
-#en comparaison avec les gens en couple ou en relation int?rrog?s en 2013!  
-#Nous pouvons conclure que il n ' y a pas une difference remarquable entre 2003 et 2013 en terme de gens en couple croyants.
+#Nous pouvons remarquer que la pourcentage des personnes croyantes et en couple interrogées en 2003 est similaire au pourcentage des personnes en couple ou en relation int?rrog?s en 2013.  
+#Nous pouvons donc conclure que il n'y a pas de difference remarcable entre 2003 et 2013, concernant les personnes en couple et croyantes. 
 
 #2.b)R?partition d'age en fonction de la religion:
 
 
-#*R?partition de l'age en fonction de partiques et croyance  en 2003 :
+#*R?partition de l'age en fonction des partiques et croyances  en 2003 :
 
 hdv %>%
   filter(!(Religiosite %in% "NSP")) %>%
@@ -236,13 +272,13 @@ hdv %>%
        y = "Croyance et pratiques", title = "Age en fonction de partiques et croyance en 2003")
 
 #en 2003:
-#On remarque que l'age des gens interrog?s se varie entre 15 et 90:
-#les gens qui ont l'age entre 35 et 55 sont le plus remarquables parmi les gens d?clarant croyants
-#Alors que pour les gens non croyants, on remarque qu'ils sont de moins en moins nombreux ? partir de 55ans! ils sont 
-#beaucoup moins nombreux que les croyants 
+#On remarque que l'age des personnes interrogées varie entre 15 ans et 90 ans:
+#les personnes agées de 35 ans à 55 ans sont les personnes qui déclarent le plus être croyants. 
+#On peut constater qu'à partir de 55ans, les personnes se déclarent moins croyantes, toutefois, les personnes non croyantes reste inférieur aux personnes coryantes. 
 
 
-#Voyons un autre figure pour pouvoir analyser en plus et tirer des conclusions pertinentes:
+
+#Voyons un autre figure pour pouvoir analyser au mieux et tirer des conclusions plus pertinentes:
 library(ggplot2)
 hdv %>%
   filter(!(Religiosite %in% "NSP")) %>%
@@ -253,19 +289,19 @@ hdv %>%
   theme_light()
 
 #en 2003:
-#on constate que les croyants  ont l'age entre 15 et 90 ans, avec:
+#on constate que les personnes croyantes sont agé de 15 à 90 ans, avec:
 #-Premier quartile autour de 37 ans
 #-La m?diane est autour de 50 ans
 #-Troisieme quartile autour de 63ans
 
-#alors que les gens non croyants ont l'age entre 15 et 85 avec des outliers, avec:
+#alors que les personnes non croyantes sont agés de 15 à 85 ans avec des outliers, avec:
 #-Premier quartile autour de 31 ans
 #-La m?diane est autour de 40 ans
 #-Troisieme quartile autour de 53an
 
 
 
-#*R?partition Age en fonction de croyance  en 2013 :
+#*R?partition Age en fonction de la croyance  en 2013 :
 
 epic %>%
   filter(!(Religiosite %in% "Ne souhaite pas r?pondre")) %>%
@@ -277,13 +313,13 @@ epic %>%
   theme_gray()
 
 #en 2013:
-#On remarque que l'age des gens  se varie entre 20 et 70:
-#les croyants sont plus nombreux que les non croyants, et plus on monte dans l'age plus le nombre des croyants augmente
-#Alors que pour les gens non croyants, on remarque qu'ils sont beaucoup moins nombreux que les croyants
+#On remarque que l'age des personnes vari entre 20 et 70 ans :
+#les personnes croyantes sont plus nombreuses que les non croyantes, et plus les personnes sont agés, plus elles sont croyantes.
+#Alors que pour les personnes non croyantes, on remarque qu'elles sont beaucoup moins nombreuse que les croyantes.
 
 
 
-#Voyons un autre figure pour pouvoir analyser en plus:
+#Voyons un autre figure pour pouvoir analyser davantage :
 
 epic %>%
   filter(!(Religiosite %in% "Ne souhaite pas r?pondre")) %>%
@@ -294,28 +330,28 @@ epic %>%
   theme_light()
 
 #en 2013:
-#on constate que les croyants  ont l'age entre 20 et 70 ans, avec:
+#on constate que les croyants sont agés de 20 à 70 ans, avec:
 #-Premier quartile autour de 39 ans
 #-La m?diane est autour de 48 ans
 #-Troisieme quartile autour de 57 ans
 
-#alors que les gens non croyants ont l'age entre 20 et 70, avec:
+#alors que les non croyants sont agé de 20 à 70 ans, avec:
 #-Premier quartile autour de 34 ans
 #-La m?diane est autour de 44 ans
 #-Troisieme quartile autour de 52an
 
 
 #Conclusion:
-#En comparaison l'age en fonction de la religionisit? entre 2003 et 2013:
-#On remarque une petite changement entre l'age des croyantes et non croyante:
-#En 2003, le nombre des personnes croyants est le plus nombreux entre l'age 35 et 55 ans.
-#En 2013, plus l'age augmente plus le nombre des gens croyants augment.
+#La religiosité en fonction de l'âge entre 2003 et 2013:
+#Nous pouvons remarquer un légé changement de croyance en fonction de l'age des croyants:
+#En 2003, le nombre de personne croyantes est le plus élevé entre 35 et 55 ans.
+#En 2013, plus l'age augmente plus le nombre des personnes croyantes augmente.
 
-#En 2003, l'age m?diane des personnes croyante est autour de 50 ans
-#En 2013, l'age m?diane des personnes croyante est autour de 48 ans
+#En 2003, l'age m?diane des personnes croyantes est autour de 50 ans
+#En 2013, l'age m?diane des personnes croyantes est autour de 48 ans
 
-#En 2003, l'age m?diane des personnes non-croyante est autour de 40 ans
-#En 2013, l'age m?diane des personnes non-croyante est autour de 44 ans
+#En 2003, l'age m?diane des personnes non-croyantes est autour de 40 ans
+#En 2013, l'age m?diane des personnes non-croyantes est autour de 44 ans
 
 
 ###############################Mbathio###########################:
@@ -343,12 +379,6 @@ ggplot(epic) +
   labs(title = "Meme diplome",
        y="pourcentage") +
   theme_bw()
-
-##Analyse 1.b 
-
-##En 2013, la religion la plus pratiqu?e en France est le catholocisme, avec plus de 60%. 
-#Nous pouvons dire que plus de la moiti? des Francais sont catholiques. 
-## L'islam est la deuxi?me religion la plus pratiqu?e en France en 2013, avec plus de 6%
 
 
 
@@ -380,4 +410,4 @@ ggplot(data = hdv) +
 ## Homogamie et religion 
 #Repr?sentation de l'homogamie en fonction de l'appartenance ? une religion.
 
-#Dans cette partie qui sera le corps de notre r?flexion, nous allons voir si en France il y a une homogamie religieuse.  
+#Dans cette partie qui sera le corps de notre r?flexion, nous allons voir si en France il y a une homogamie religieuse.
