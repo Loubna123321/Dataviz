@@ -202,13 +202,13 @@ ggplot(epic) +
        y="pourcentage") +
   theme_bw()
 ```
-##Analyse 1.b 
+## Analyse 1.b 
 
 En 2013, la religion la plus pratiquée en France est le catholicisme, avec plus de 60%. 
 Nous pouvons dire que plus de la moitié des Français sont catholiques. 
 L'islam est la deuxiéme religion la plus pratiquée en France en 2013, avec plus de 6%
 
-# Religiosité et mise en couple
+# 2.Religiosité, mise en couple et âge
 
 Dans cette partie, nous allons analyser les personnes en couple en fonction de leur réligionisité en 2003, puis en 2013.
 Puis, nous allons pouvoir comparer ces deux cas.
@@ -263,7 +263,7 @@ personnes non religieuses et non en couple est presque de 1500 personnes.
 Nous pouvons remarquer que la pourcentage des personnes croyantes et en couple interrogées en 2003 est similaire au pourcentage des personnes en couple ou en relation interrogées en 2013.  
 Nous pouvons donc conclure que il n'y a pas de différence remarquable entre 2003 et 2013, concernant les personnes en couple et croyantes. 
 
-# 2.b)Répartition d'age en fonction de la religion:
+# 2.b) Répartition d'age en fonction de la religion:
 
 
 ## Répartition de l'age en fonction des partiques et croyances en 2003 :
