@@ -139,7 +139,7 @@ epic$CSP_conjoint <- as.factor(epic$CSP_conjoint)
 
 epic$CSP_conjoint <- fct_recode(epic$CSP_conjoint,
                                 "Agriculteurs"="1",
-                                "Artisans, commerçants, chefs d'entreprise"="2",
+                                "Artisans, commercants, chefs d'entreprise"="2",
                                 "Cadres des entreprises"="3",
                                 "Professions intellectuelles, cadres superieurs du public, professions liberales"="4",
                                 "Professions intermediaires de l'enseignement du public"="5",
@@ -161,7 +161,7 @@ epic$CSP_enquete <- as.factor(epic$CSP_enquete) #je transforme ma variable en fa
 
 epic$CSP_enquete <- fct_recode(epic$CSP_enquete,
                                "Agriculteurs"="1",
-                               "Artisans, commerçants, chefs d'entreprise"="2",
+                               "Artisans, commercants, chefs d'entreprise"="2",
                                "Cadres des entreprises"="3",
                                "Professions intellectuelles, cadres superieurs du public, professions liberales"="4",
                                "Professions intermediaires de l'enseignement du public"="5",
