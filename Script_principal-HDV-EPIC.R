@@ -472,5 +472,118 @@ hdv$CSP_conjoint_recode <- fct_recode(hdv$CSP_conjoint_recode,
                                       "CSP_pmoyennes"="Employe ou personnel",
                                       NULL="Autre",
                                       NULL="Ne sait pas")
+
 #Nous faisons l'hypothese que la structure sociale n'a pas beaucoup change en 10 ans
-#Cela implique de considerer les "employe ou personnel" comme classe moyenne malgre la complexite sociale de ce groupe 
+#Cela implique d'équilibrer le nombre de personne dans chaque categorie et donc de considerer les "employe ou personnel" comme classe moyenne malgre la complexite sociale de ce groupe 
+
+# Il s'agit maintenant de représenter la proportion d'homogamie dans chaque catégorie professionnelle et ce selon la religiosité de l'enqueté
+# Nous allons donc construire au préalable les tableaux correspondants sous forme de bases de données pour pouvoir les utiliser dans ggplot
+# On commence par le tableaux d'epic et ici des croyants :
+tab1<-data.frame(cprop(table(
+  filter(epic, Religiosite == "Croyant" 
+         & !is.na(CSP_conjoint_recode)
+         )$CSP_conjoint_recode,
+  filter(epic, Religiosite == "Croyant" 
+         & !is.na(CSP_conjoint_recode)
+         )$CSP_enquete_recode),total = FALSE))
+tab1$Religiosite<-"Croyant"
+
+#Puis des non croyants :
+tab2<-data.frame(cprop(table(
+  filter(epic, Religiosite == "Non-Croyant" 
+         & !is.na(CSP_conjoint_recode)
+         )$CSP_conjoint_recode,
+  filter(epic, Religiosite == "Non-Croyant" 
+         & !is.na(CSP_conjoint_recode)
+         )$CSP_enquete_recode),total = FALSE))
+tab2$Religiosite<-"Non-Croyant"
+
+#Que l'on fusionne, renomme et arrondi (en sociologie, un surplus de précision est absurde)
+tabepiccsp<-rbind(tab1, tab2)
+names(tabepiccsp)<-c('CSP_conjoint',
+               'CSP_enquete',
+               'Freq',
+               'Religiosite')
+tabepiccsp$Freq<-round(tabepiccsp$Freq,1)
+rm(tab1,tab2)
+
+#Ensuite on fait de même avec HDV :
+tab1<-data.frame(cprop(table(
+  filter(hdv, Rapport_religion == "Ni pratique ni appartenance" 
+         | Rapport_religion == "Rejet" 
+         & !is.na(CSP_conjoint_recode)
+         )$CSP_conjoint_recode,
+  filter(hdv, Rapport_religion == "Ni pratique ni appartenance" 
+         | Rapport_religion == "Rejet" 
+         & !is.na(CSP_conjoint_recode)
+         )$CSP_enquete_recode),total = FALSE))
+tab1$Religiosite <-"Non-Croyant"
+
+
+tab2<-data.frame(cprop(table(
+  filter(hdv, Rapport_religion == "Pratique reguliere" 
+         | Rapport_religion == "Pratique occasionnelle" 
+         | Rapport_religion == "Sentiment d'appartenance sans pratique" 
+         & !is.na(CSP_conjoint_recode)
+         )$CSP_conjoint_recode,
+  filter(hdv, Rapport_religion == "Pratique reguliere" 
+         | Rapport_religion == "Pratique occasionnelle" 
+         | Rapport_religion == "Sentiment d'appartenance sans pratique" 
+         & !is.na(CSP_conjoint_recode))$CSP_enquete_recode),total = FALSE))
+tab2$Religiosite <-"Croyant"
+
+tabhdvcsp<-rbind(tab1, tab2)
+names(tabhdvcsp)<-c('CSP_conjoint',
+                     'CSP_enquete',
+                     'Freq',
+                     'Religiosite')
+tabhdvcsp$Freq<-round(tabhdvcsp$Freq,1)
+rm(tab1,tab2)
+
+# On peut alors construire les graphiques 
+# Pour Epic :
+ggplot(filter(tabepiccsp, CSP_conjoint == CSP_enquete)) + #Comme on s'intéresse à l'homogamie professionnelle, on ne regarde que les personnes en couple avec des individus de même classe de CSP
+  aes(x = CSP_enquete, weight = Freq) +
+  geom_bar(fill = "#24D1C1") +
+  scale_x_discrete(limits = c("CSP_populaires", "CSP_moyennes", "CSP_superieures"), labels=c("CSP populaires", "CSP moyennes", "CSP superieures")) + #On réordonne pour que la lecture soit plus intuitive
+  labs(
+    x = "CSP de l'enquêté",
+    y = "Proportion d'homogamie",
+    title = "Proportion d'homogamie professionnelle",
+    subtitle = "selon la religiosité, en 2013",
+    caption = "Source : EPIC, 2013
+    Population : individus en couple
+    Lecture : en 2013, 49,5% des individus se déclarant croyant et de CSP superieure sont en couple avec des individus de même CSP") +
+  geom_text(aes(y = Freq +2, 
+                label = paste0(Freq, ' %')), 
+            position = position_dodge(.9), 
+            size = 3) + #On ajoute ici les pourcentage de chaque barre pour faciliter la lecture 
+  theme_minimal() +
+  facet_wrap(vars(Religiosite)) #On demande de faire deux graphiques cote à cote pour pouvoir comparer
+
+#On voit dans sur ce graphique que les personnes de CSP populaire se definissant comme croyantes sont plus homogames que celles se definissant comme non croyantes (46.7% contre 42.7%). De même pour les personnes de CSP Superieures (49.5% contre 45.6%). 
+#Cependant, les personnes de CSP moyenne croyantes sont moins homogames que les non croyantes (47.8% contre 54.1%).
+
+
+#Et pour HDV : 
+ggplot(filter(tabhdvcsp, CSP_conjoint == CSP_enquete)) +
+  aes(x = CSP_enquete, weight = Freq) +
+  geom_bar(fill = "#24D1C1") +
+  scale_x_discrete(limits = c("CSP_populaires", "CSP_moyennes", "CSP_superieures", labels=c("CSP populaires", "CSP moyennes", "CSP superieures"))) +
+  labs(
+    x = "CSP de l'enquêté",
+    y = "Proportion d'homogamie",
+    title = "Proportion d'homogamie professionnelle",
+    subtitle = "selon la religiosité, en 2003",
+    caption = "Source : HDV, 2003
+    Population : individus en couple
+    Lecture : en 2013, 52% des individus se déclarant croyant et de CSP moyenne sont en couple avec des individus de même CSP") +
+  geom_text(aes(y = Freq +2, 
+                label = paste0(Freq, ' %')), 
+            position = position_dodge(.9), 
+            size = 3) +
+  theme_minimal() +
+  facet_wrap(vars(Religiosite))
+
+# Ce dernier graphique montre une même tendance pour les catégories populaires et moyennes mais une tendance inverse pour les catégories superieures.
+# Comme ces dernières catégories regroupent peu d'individus et qu'il nous a falllu faire un recodage un peu grossier, il semble dangereux d'interpreter ce changement radical de tendance (on est passé de -3.9 pts à +9.6)
