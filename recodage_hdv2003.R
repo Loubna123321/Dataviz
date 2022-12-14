@@ -45,7 +45,7 @@ names(hdv) <- c('Age_enquete',
 hdv$Rapport_religion <- as.factor(hdv$Rapport_religion) #je transforme ma variable en facteur.
 
 hdv$Rapport_religion <- fct_recode(hdv$Rapport_religion,
-                                   "Pratique réguliere"="1",
+                                   "Pratique reguliere"="1",
                                    "Pratique occasionnelle"="2",
                                    "Sentiment d'appartenance sans pratique"="3",
                                    "Ni pratique ni appartenance"="4",
@@ -159,9 +159,6 @@ hdv$Position_profess_conjoint <- fct_recode(hdv$Position_profess_conjoint,
 
 #------------------------------------------------------------------------------------------
 
-###Il faudrait ici combiner les QUAL avec les STATUT pour former de vraies caterogies professionnelles.
-
-
 #Traitement des variables de bases : SEXEE (sexe enquete), SEXECJ (sexe conjoint), AGEE (age enquete), AGECJ (age conjoint).
 #Sexe enquete
 hdv$Sexe_enquete <- as.factor(hdv$Sexe_enquete) #je transforme ma variable en facteur.
@@ -181,14 +178,9 @@ hdv$Sexe_conjoint <- fct_recode(hdv$Sexe_conjoint,
 
 #------------------------------------------------------------------------------------------
 
-
-
 #Vie en couple:
 hdv$Vie_en_couple <- as.factor(hdv$Vie_en_couple) #je transforme ma variable en facteur.
 
 hdv$Vie_en_couple <- fct_recode(hdv$Vie_en_couple,
                                 "oui"="1",
                                 "non"="2",)
-
-table(hdv$Vie_en_couple)
-
