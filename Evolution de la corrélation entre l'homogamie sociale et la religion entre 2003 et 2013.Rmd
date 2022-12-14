@@ -306,7 +306,7 @@ alors que les personnes non croyantes sont agés de 15 à 85 ans avec des outlie
 
 
 
-# Répartition Age en fonction de la croyance  en 2013 :
+# Répartition Age en fonction de la croyance en 2013 :
 ```{r}
 epic %>%
   filter(!(Religiosite %in% "Ne souhaite pas repondre")) %>%
@@ -358,18 +358,21 @@ En 2013, l'age médiane des personnes croyantes est autour de 48 ans
 En 2003, l'age médiane des personnes non-croyantes est autour de 40 ans
 En 2013, l'age médiane des personnes non-croyantes est autour de 44 ans
 
+# Homogamie sociale et religiosité
 
-### nous allons créer une nouvelle variable qui nous permettra de voir s'il ya un homogamie de diplome
+## 1. Niveaux de diplôme
+
+Nous allons créer une nouvelle variable qui nous permettra de voir s'il ya un homogamie de diplome
 ```{r}
 hdv$meme_diplome <- ifelse(as.character(hdv$Niveau_etude_conjoint) == as.character(hdv$Niveau_etude_enquete), "YES", "NO")
 ```
-### nous allons créer une variable qui nous permettra de voir si il y'a un homogamie de diplome. 
+Nous allons créer une variable qui nous permettra de voir si il y'a un homogamie de diplome. 
 ```{r}
 epic$meme_diplome <- ifelse(as.character(epic$Diplome_eleve_conjoint) == as.character(epic$Diplome_eleve_enquete), "YES", "NO")
 ```
 
 
-# Homogamie et religion 
+### Homogamie et religion 
 
 Representation de l'homogamie en fonction de l'appartenance à une religion.
 ```{r}
@@ -422,7 +425,7 @@ Le tableau nous montre que les individu qui croient au catholicisme semblent avo
 !!!!!!!!!!!!!!!!!!!!!!!!!! On ne fait ici, aucune différence entre les religions, et puis quel est l’intérêt de dire que les croyants ont des diplômes ? 
 
 
-# Homogamie proffessionnelle et religion
+## 2.Homogamie proffessionnelle
 
 Pour pouvoir étudier le comportement homogame dans sa dimension professionnelle, nous allons regrouper les modalités des variables de CSP de chaque base en trois catégories :
 CSP_populaires
