@@ -621,3 +621,9 @@ ggplot(filter(tabhdvcsp, CSP_conjoint == CSP_enquete)) +
 ```
 Ce dernier graphique montre une même tendance pour les catégories populaires et moyennes mais une tendance inverse pour les catégories superieures.
 Comme ces dernières catégories regroupent peu d'individus et qu'il nous a falllu faire un recodage un peu grossier, il semble dangereux d'interpreter ce changement radical de tendance (on est passé de -3.9 pts à +9.6)
+
+# Conclusion
+
+On a pu voir que dans la population française, les personnes qui se déclarant croyantes sont plus souvent en couple que les non-croyantes (67,2% contre 61,6% en 2003) ce qui montre l'existence d'un lien particulier entre les normes et valeurs religieuses et la mise en couple. Nous avons aussi pu confirmer la corrélation positive entre croyance et age. 
+Les deux dimensions de l'homogamie sociale que nous avons choisis d'approfondir (le niveaux de diplôme et les CSPs) ont permis de percevoir une corrélation intéressante entre homogamie et religiosité : Les personnes se déclarants croyantes sont légèrement plus souvent en couple avec des individus de même niveau de diplôme. De plus, si en moyenne la croyance semble peut affecter l'homogamie professionnelle, elle a une effet très distinct selon la classe sociale. En effet, chez les classes populaires, le fait de croire est légèrement (de l'ordre de 4 points) mais positivement corrélé à l'homogamie de CSP alors qu'il l'est fortement et négativement pour les classes moyennes (de -6 à -10 points).
+Il serait particulièrement intéressant d'approfondir la description de ce phénomène en creusant chaque dimension via le prisme des différences de pratiques religieuses qui vont du simple sentiment d'appartenance à une pratique quotidienne et impliquent donc un rapport très différencié aux normes et valeurs concernant l'amour.
