@@ -208,6 +208,8 @@ En 2013, la religion la plus pratiquée en France est le catholicisme, avec plus
 Nous pouvons dire que plus de la moitié des Français sont catholiques. 
 L'islam est la deuxiéme religion la plus pratiquée en France en 2013, avec plus de 6%
 
+# Religiosité et mise en couple
+
 Dans cette partie, nous allons analyser les personnes en couple en fonction de leur réligionisité en 2003, puis en 2013.
 Puis, nous allons pouvoir comparer ces deux cas.
 Par la suite, nous allons analyser l'age en fonction de la réligionisité en 2003, puis en 2013.
@@ -356,8 +358,6 @@ En 2013, l'age médiane des personnes croyantes est autour de 48 ans
 En 2003, l'age médiane des personnes non-croyantes est autour de 40 ans
 En 2013, l'age médiane des personnes non-croyantes est autour de 44 ans
 
-
-###############################Mbathio###########################:
 
 ### nous allons créer une nouvelle variable qui nous permettra de voir s'il ya un homogamie de diplome
 ```{r}
