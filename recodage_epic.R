@@ -90,7 +90,7 @@ epic$Religion_enquete <- fct_recode(epic$Religion_enquete,
                                     "Islam"= "3",
                                     "Bouddhisme"="4",
                                     "Hindouisme"="5",
-                                    "Judaïsme"="6",
+                                    "Judaisme"="6",
                                     "Autre"="7",
                                     "Sans religion"="8",
                                     "Ne souhaite pas répondre"="98")
