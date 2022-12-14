@@ -1,0 +1,311 @@
+---
+title: "Evolution de la corrélation entre l'homogamie sociale et la religion entre 2003 et 2013"
+author: "Loubna Zidan, Anouchka Béal-Récard, Justine Guieu, Sokhna Mbathio Mbengue, Emmanuel Herbepin"
+date: 'Décembre 2022'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, message=FALSE, warning=FALSE}
+library(foreign)
+library(questionr)
+library(survey)
+library(R2HTML)
+library(tidyverse)
+library(esquisse)
+library(labelled)
+library(DataExplorer)
+library(funModeling)
+library(missForest)
+library(dplyr)
+library(tinytex)
+library(ggplot2)
+library(ggmosaic)
+```
+
+## Exploration et nettoyage de la base HDV2003: 
+
+La base de donnees HDV etant en 4 parties, nous avons ouvert la premiere et la quatrieme...
+```{r, message=FALSE}
+hdv1<-read.csv2("hdv1.csv")
+hdv4<-read.csv2("hdv4.csv")
+```
+Pour selectionner les variables qui nous interessent :
+```{r}
+colnames(hdv1) #Nous visualisons le nom des colonnes
+hdv1_select <- select(hdv1, c(AGEE,AGECJ))
+hdv4_select <- select(hdv4, c(STATUTE,STATUTCJ,NIVE2TE,NIVE2TCJ,QUALIFE,QUALCJ,SEXEE,SEXECJ,VRELIG,VENREL,VIECOUE))
+```
+
+On concatène ensuite les deux BDD :
+```{r}
+hdv <- cbind(hdv1_select, hdv4_select)
+```
+Puis nous nettoyons notre environnement :
+```{r}
+rm(hdv1,hdv4,hdv1_select, hdv4_select)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Exploration et nettoyage de la base EPIC: 
+
+Pour la base EPIC, nous avons ouvert la base de données EPIC pour y récupérer ce qu'il nous faut :
+```{r}
+epic <- select(read.csv("repondant.txt", sep="\t"),
+               c(IndCOU,R_IMPREL,R_RELIGC,R_RELIGION,C_DIPLOMEC,M_DIPLOME,C_CS13C,M_CS13,SEXER,H_SEXEC_C,AGEM,H_ANAISC_C,R_MOINDIPL,R_PLUDIPL))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Homogamie proffessionnelle et religion
+
+Pour pouvoir étudier le comportement homogame dans sa dimension professionnelle, nous allons regrouper les modalités des variables de CSP de chaque base en trois catégories :
+CSP_populaires
+CSP_moyennes
+CSP_superieures
+
+Au vu de la faible représentation des modalités "ne sait pas", "En etude" et "Autre", nous avons décidé de les enlever de notre population
+
+```{r}
+epic$CSP_conjoint_recode <- epic$CSP_conjoint
+epic$CSP_conjoint_recode <- as.factor(epic$CSP_conjoint_recode)
+epic$CSP_conjoint_recode <- fct_recode(epic$CSP_conjoint_recode,
+                                       "CSP_populaires"="Agriculteurs",
+                                       "CSP_superieures"="Artisans, commercants, chefs d'entreprise",
+                                       "CSP_superieures"="Cadres des entreprises",
+                                       "CSP_superieures"="Professions intellectuelles, cadres superieurs du public, professions liberales",
+                                       "CSP_moyennes"="Professions intermediaires de l'enseignement du public",
+                                       "CSP_moyennes"="Professions intermediaires de la sante et du travail social",
+                                       "CSP_moyennes"="Professions intermediaires des entreprises",
+                                       "CSP_moyennes"="Employes bureau et secteur public",
+                                       "CSP_moyennes"="Employes commerce et services",
+                                       "CSP_populaires"="Ouvriers qualifies",
+                                       "CSP_populaires"="Ouvriers non qualifies",
+                                       "CSP_populaires"="Au foyer",
+                                       NULL="En etudes",
+                                       NULL="Ne sait pas")
+
+epic$CSP_enquete_recode <- epic$CSP_enquete
+epic$CSP_enquete_recode <- as.factor(epic$CSP_enquete_recode)
+epic$CSP_enquete_recode <- fct_recode(epic$CSP_enquete_recode,
+                                      "CSP_populaires"="Agriculteurs",
+                                      "CSP_superieures"="Artisans, commercants, chefs d'entreprise",
+                                      "CSP_superieures"="Cadres des entreprises",
+                                      "CSP_superieures"="Professions intellectuelles, cadres superieurs du public, professions liberales",
+                                      "CSP_moyennes"="Professions intermediaires de l'enseignement du public",
+                                      "CSP_moyennes"="Professions intermediaires de la sante et du travail social",
+                                      "CSP_moyennes"="Professions intermediaires des entreprises",
+                                      "CSP_moyennes"="Employes bureau et secteur public",
+                                      "CSP_moyennes"="Employes commerce et services",
+                                      "CSP_populaires"="Ouvriers qualifies",
+                                      "CSP_populaires"="Ouvriers non qualifies",
+                                      "CSP_populaires"="Au foyer",
+                                      NULL="En etudes",
+                                      NULL="Ne sait pas")
+
+hdv$CSP_enquete_recode <- hdv$Position_profess_enquete
+hdv$CSP_enquete_recode <- as.factor(hdv$CSP_enquete_recode)
+hdv$CSP_enquete_recode <- fct_recode(hdv$CSP_enquete_recode,
+                                     "CSP_populaires"="Manoeuvre ou ouvrier specialise",
+                                     "CSP_populaires"="Ouvrier qualifie ou technicien.ne d'atelier",
+                                     "CSP_moyennes"="Technicien.ne non cadre",
+                                     "CSP_moyennes"="Agent administratif ou commerciaux",
+                                     "CSP_superieures"="Ingenieur ou cadre",
+                                     "CSP_moyennes"="Employe ou personnel",
+                                     NULL="Autre",
+                                     NULL="Ne sait pas")
+
+hdv$CSP_conjoint_recode <- hdv$Position_profess_conjoint
+hdv$CSP_conjoint_recode <- as.factor(hdv$CSP_conjoint_recode)
+hdv$CSP_conjoint_recode <- fct_recode(hdv$CSP_conjoint_recode,
+                                      "CSP_populaires"="Manoeuvre ou ouvrier specialise",
+                                      "CSP_populaires"="Ouvrier qualifie ou technicien.ne d'atelier",
+                                      "CSP_moyennes"="Technicien.ne non cadre",
+                                      "CSP_moyennes"="Agent administratif ou commerciaux",
+                                      "CSP_superieures"="Ingenieur ou cadre",
+                                      "CSP_moyennes"="Employe ou personnel",
+                                      NULL="Autre",
+                                      NULL="Ne sait pas")
+```
+Nous faisons l’hypothèse que la structure sociale n'a pas beaucoup changé en 10 ans
+Cela implique d'équilibrer le nombre de personnes dans chaque catégorie et donc de considérer les "employe ou personnel" comme classe moyenne malgré la complexité sociale de ce groupe 
+
+## Représentation
+
+Il s'agit maintenant de représenter la proportion d'homogamie dans chaque catégorie professionnelle et ce selon la religiosité de l’enqueté
+Nous allons donc construire au préalable les tableaux correspondants sous forme de bases de données pour pouvoir les utiliser dans ggplot
+
+### On commence par le tableaux d'epic et ici des croyants :
+```{r}
+tab1<-data.frame(cprop(table(
+  filter(epic, Religiosite == "Croyant" 
+         & !is.na(CSP_conjoint_recode)
+         )$CSP_conjoint_recode,
+  filter(epic, Religiosite == "Croyant" 
+         & !is.na(CSP_conjoint_recode)
+         )$CSP_enquete_recode),total = FALSE))
+tab1$Religiosite<-"Croyant"
+```
+
+### Puis des non-croyants :
+```{r}
+tab2<-data.frame(cprop(table(
+  filter(epic, Religiosite == "Non-Croyant" 
+         & !is.na(CSP_conjoint_recode)
+         )$CSP_conjoint_recode,
+  filter(epic, Religiosite == "Non-Croyant" 
+         & !is.na(CSP_conjoint_recode)
+         )$CSP_enquete_recode),total = FALSE))
+tab2$Religiosite<-"Non-Croyant"
+```
+
+Que l'on fusionne, renomme et arrondi (en sociologie, un surplus de précision est absurde)
+```{r}
+tabepiccsp<-rbind(tab1, tab2)
+names(tabepiccsp)<-c('CSP_conjoint',
+               'CSP_enquete',
+               'Freq',
+               'Religiosite')
+tabepiccsp$Freq<-round(tabepiccsp$Freq,1)
+rm(tab1,tab2)
+```
+
+### Ensuite on fait de même avec HDV :
+```{r}
+tab1<-data.frame(cprop(table(
+  filter(hdv, Rapport_religion == "Ni pratique ni appartenance" 
+         | Rapport_religion == "Rejet" 
+         & !is.na(CSP_conjoint_recode)
+         )$CSP_conjoint_recode,
+  filter(hdv, Rapport_religion == "Ni pratique ni appartenance" 
+         | Rapport_religion == "Rejet" 
+         & !is.na(CSP_conjoint_recode)
+         )$CSP_enquete_recode),total = FALSE))
+tab1$Religiosite <-"Non-Croyant"
+
+tab2<-data.frame(cprop(table(
+  filter(hdv, Rapport_religion == "Pratique reguliere" 
+         | Rapport_religion == "Pratique occasionnelle" 
+         | Rapport_religion == "Sentiment d'appartenance sans pratique" 
+         & !is.na(CSP_conjoint_recode)
+         )$CSP_conjoint_recode,
+  filter(hdv, Rapport_religion == "Pratique reguliere" 
+         | Rapport_religion == "Pratique occasionnelle" 
+         | Rapport_religion == "Sentiment d'appartenance sans pratique" 
+         & !is.na(CSP_conjoint_recode))$CSP_enquete_recode),total = FALSE))
+tab2$Religiosite <-"Croyant"
+
+tabhdvcsp<-rbind(tab1, tab2)
+names(tabhdvcsp)<-c('CSP_conjoint',
+                     'CSP_enquete',
+                     'Freq',
+                     'Religiosite')
+tabhdvcsp$Freq<-round(tabhdvcsp$Freq,1)
+rm(tab1,tab2)
+```
+
+## On peut alors construire les graphiques 
+### Pour Epic :
+```{r}
+ggplot(filter(tabepiccsp, CSP_conjoint == CSP_enquete)) + #Comme on s'intéresse à l'homogamie professionnelle, on ne regarde que les personnes en couple avec des individus de même classe de CSP
+  aes(x = CSP_enquete, weight = Freq) +
+  geom_bar(fill = "#24D1C1") +
+  scale_x_discrete(limits = c("CSP_populaires", "CSP_moyennes", "CSP_superieures"), labels=c("CSP populaires", "CSP moyennes", "CSP superieures")) + #On réordonne pour que la lecture soit plus intuitive
+  labs(
+    x = "CSP de l'enquêté",
+    y = "Proportion d'homogamie",
+    title = "Proportion d'homogamie professionnelle",
+    subtitle = "selon la religiosité, en 2013",
+    caption = "Source : EPIC, 2013
+    Population : individus en couple
+    Lecture : en 2013, 49,5% des individus se déclarant croyant et de CSP superieure sont en couple avec des individus de même CSP") +
+  geom_text(aes(y = Freq +2, 
+                label = paste0(Freq, ' %')), 
+            position = position_dodge(.9), 
+            size = 3) + #On ajoute ici les pourcentage de chaque barre pour faciliter la lecture 
+  theme_minimal() +
+  facet_wrap(vars(Religiosite)) #On demande de faire deux graphiques cote à cote pour pouvoir comparer
+```
+
+On voit dans sur ce graphique que les personnes de CSP populaire se definissant comme croyantes sont plus homogames que celles se definissant comme non croyantes (46.7% contre 42.7%). De même pour les personnes de CSP Superieures (49.5% contre 45.6%). 
+Cependant, les personnes de CSP moyenne croyantes sont moins homogames que les non croyantes (47.8% contre 54.1%).
+
+
+### Et pour HDV : 
+```{r}
+ggplot(filter(tabhdvcsp, CSP_conjoint == CSP_enquete)) +
+  aes(x = CSP_enquete, weight = Freq) +
+  geom_bar(fill = "#24D1C1") +
+  scale_x_discrete(limits = c("CSP_populaires", "CSP_moyennes", "CSP_superieures"), labels=c("CSP populaires", "CSP moyennes", "CSP superieures")) +
+  labs(
+    x = "CSP de l'enquêté",
+    y = "Proportion d'homogamie",
+    title = "Proportion d'homogamie professionnelle",
+    subtitle = "selon la religiosité, en 2003",
+    caption = "Source : HDV, 2003
+    Population : individus en couple
+    Lecture : en 2013, 52% des individus se déclarant croyant et de CSP moyenne sont en couple avec des individus de même CSP") +
+  geom_text(aes(y = Freq +2, 
+                label = paste0(Freq, ' %')), 
+            position = position_dodge(.9), 
+            size = 3) +
+  theme_minimal() +
+  facet_wrap(vars(Religiosite))
+```
+Ce dernier graphique montre une même tendance pour les catégories populaires et moyennes mais une tendance inverse pour les catégories superieures.
+Comme ces dernières catégories regroupent peu d'individus et qu'il nous a falllu faire un recodage un peu grossier, il semble dangereux d'interpreter ce changement radical de tendance (on est passé de -3.9 pts à +9.6)
