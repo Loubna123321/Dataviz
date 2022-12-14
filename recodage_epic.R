@@ -138,20 +138,20 @@ epic$Diplome_eleve_enquete <- fct_recode(epic$Diplome_eleve_enquete,
 epic$CSP_conjoint <- as.factor(epic$CSP_conjoint)
 
 epic$CSP_conjoint <- fct_recode(epic$CSP_conjoint,
-                               "Agriculteurs"="1",
-                               "Artisans, commerçants, chefs d'entreprise"="2",
-                               "Cadres des entreprises"="3",
-                               "Professions intellectuelles, cadres supérieurs du public, professions libérales"="4",
-                               "Professions intermédiaires de l'enseignement du public"="5",
-                               "Professions intermédiaires de la santé et du travail social"="6",
-                               "Professions intermédiaires des entreprises"="7",
-                               "Employés bureau et secteur public"="8",
-                               "Employés commerce et services"="9",
-                               "Ouvriers qualifiés"="10",
-                               "Ouvriers non qualifiés"="11",
-                               "Au foyer"="12",
-                               "En études"="13",
-                               "Ne sait pas"="99")
+                                "Agriculteurs"="1",
+                                "Artisans, commerçants, chefs d'entreprise"="2",
+                                "Cadres des entreprises"="3",
+                                "Professions intellectuelles, cadres superieurs du public, professions liberales"="4",
+                                "Professions intermediaires de l'enseignement du public"="5",
+                                "Professions intermediaires de la sante et du travail social"="6",
+                                "Professions intermediaires des entreprises"="7",
+                                "Employes bureau et secteur public"="8",
+                                "Employes commerce et services"="9",
+                                "Ouvriers qualifies"="10",
+                                "Ouvriers non qualifies"="11",
+                                "Au foyer"="12",
+                                "En etudes"="13",
+                                "Ne sait pas"="99")
 
 #------------------------------------------------------------------------------------------
 
@@ -160,20 +160,20 @@ epic$CSP_conjoint <- fct_recode(epic$CSP_conjoint,
 epic$CSP_enquete <- as.factor(epic$CSP_enquete) #je transforme ma variable en facteur.
 
 epic$CSP_enquete <- fct_recode(epic$CSP_enquete,
-                                             "Agriculteurs"="1",
-                                             "Artisans, commerçants, chefs d'entreprise"="2",
-                                             "Cadres des entreprises"="3",
-                                             "Professions intellectuelles, cadres supérieurs du public, professions libérales"="4",
-                                             "Professions intermédiaires de l'enseignement du public"="5",
-                                             "Professions intermédiaires de la santé et du travail social"="6",
-                                             "Professions intermédiaires des entreprises"="7",
-                                             "Employés bureau et secteur public"="8",
-                                             "Employés commerce et services"="9",
-                                             "Ouvriers qualifiés"="10",
-                                             "Ouvriers non qualifiés"="11",
-                                             "Au foyer"="12",
-                                             "En études"="13",
-                                             "Ne sait pas"="99")
+                               "Agriculteurs"="1",
+                               "Artisans, commerçants, chefs d'entreprise"="2",
+                               "Cadres des entreprises"="3",
+                               "Professions intellectuelles, cadres superieurs du public, professions liberales"="4",
+                               "Professions intermediaires de l'enseignement du public"="5",
+                               "Professions intermediaires de la sante et du travail social"="6",
+                               "Professions intermediaires des entreprises"="7",
+                               "Employes bureau et secteur public"="8",
+                               "Employes commerce et services"="9",
+                               "Ouvriers qualifies"="10",
+                               "Ouvriers non qualifies"="11",
+                               "Au foyer"="12",
+                               "En etudes"="13",
+                               "Ne sait pas"="99")
 
 #------------------------------------------------------------------------------------------
 
