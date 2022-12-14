@@ -406,7 +406,71 @@ ggplot(data = hdv) +
 
 ###############################Emmanuel###########################:
 
-## Homogamie et religion 
-#Repr?sentation de l'homogamie en fonction de l'appartenance ? une religion.
+## CSP et religion
 
-#Dans cette partie qui sera le corps de notre r?flexion, nous allons voir si en France il y a une homogamie religieuse.
+#Pour pouvoir etudier le comportement homogame dans sa dimension professionnelle, nous allons regrouper les modalites des variables de CSP de chaque base en trois categories :
+# > CSP_populaires
+# > CSP_moyennes
+# > CSP_superieures
+
+epic$CSP_conjoint_recode <- epic$CSP_conjoint
+epic$CSP_conjoint_recode <- as.factor(epic$CSP_conjoint_recode)
+epic$CSP_conjoint_recode <- fct_recode(epic$CSP_conjoint_recode,
+                                       "CSP_populaires_c"="Agriculteurs",
+                                       "CSP_superieures_c"="Artisans, commerçants, chefs d'entreprise",
+                                       "CSP_superieures_c"="Cadres des entreprises",
+                                       "CSP_superieures_c"="Professions intellectuelles, cadres superieurs du public, professions liberales",
+                                       "CSP_moyennes_c"="Professions intermediaires de l'enseignement du public",
+                                       "CSP_moyennes_c"="Professions intermediaires de la sante et du travail social",
+                                       "CSP_moyennes_c"="Professions intermediaires des entreprises",
+                                       "CSP_moyennes_c"="Employes bureau et secteur public",
+                                       "CSP_moyennes_c"="Employes commerce et services",
+                                       "CSP_populaires_c"="Ouvriers qualifies",
+                                       "CSP_populaires_c"="Ouvriers non qualifies",
+                                       "CSP_populaires_c"="Au foyer",
+                                       NULL="En etudes",
+                                       NULL="Ne sait pas")
+
+epic$CSP_enquete_recode <- epic$CSP_enquete
+epic$CSP_enquete_recode <- as.factor(epic$CSP_enquete_recode)
+epic$CSP_enquete_recode <- fct_recode(epic$CSP_enquete_recode,
+                                      "CSP_populaires_e"="Agriculteurs",
+                                      "CSP_superieures_e"="Artisans, commerçants, chefs d'entreprise",
+                                      "CSP_superieures_e"="Cadres des entreprises",
+                                      "CSP_superieures_e"="Professions intellectuelles, cadres superieurs du public, professions liberales",
+                                      "CSP_moyennes_e"="Professions intermediaires de l'enseignement du public",
+                                      "CSP_moyennes_e"="Professions intermediaires de la sante et du travail social",
+                                      "CSP_moyennes_e"="Professions intermediaires des entreprises",
+                                      "CSP_moyennes_e"="Employes bureau et secteur public",
+                                      "CSP_moyennes_e"="Employes commerce et services",
+                                      "CSP_populaires_e"="Ouvriers qualifies",
+                                      "CSP_populaires_e"="Ouvriers non qualifies",
+                                      "CSP_populaires_e"="Au foyer",
+                                      NULL="En etudes",
+                                      NULL="Ne sait pas")
+
+hdv$CSP_enquete_recode <- hdv$Position_profess_enquete
+hdv$CSP_enquete_recode <- as.factor(hdv$CSP_enquete_recode)
+hdv$CSP_enquete_recode <- fct_recode(hdv$CSP_enquete_recode,
+                                     "CSP_populaires_e"="Manoeuvre ou ouvrier specialise",
+                                     "CSP_populaires_e"="Ouvrier qualifie ou technicien.ne d'atelier",
+                                     "CSP_moyennes_e"="Technicien.ne non cadre",
+                                     "CSP_moyennes_e"="Agent administratif ou commerciaux",
+                                     "CSP_superieures_e"="Ingenieur ou cadre",
+                                     "CSP_moyennes_e"="Employe ou personnel",
+                                     NULL="Autre",
+                                     NULL="Ne sait pas")
+
+hdv$CSP_conjoint_recode <- hdv$Position_profess_conjoint
+hdv$CSP_conjoint_recode <- as.factor(hdv$CSP_conjoint_recode)
+hdv$CSP_conjoint_recode <- fct_recode(hdv$CSP_conjoint_recode,
+                                      "CSP_populaires_c"="Manoeuvre ou ouvrier specialise",
+                                      "CSP_populaires_c"="Ouvrier qualifie ou technicien.ne d'atelier",
+                                      "CSP_moyennes_c"="Technicien.ne non cadre",
+                                      "CSP_moyennes_c"="Agent administratif ou commerciaux",
+                                      "CSP_superieures_c"="Ingenieur ou cadre",
+                                      "CSP_pmoyennes"="Employe ou personnel",
+                                      NULL="Autre",
+                                      NULL="Ne sait pas")
+#Nous faisons l'hypothese que la structure sociale n'a pas beaucoup change en 10 ans
+#Cela implique de considerer les "employe ou personnel" comme classe moyenne malgre la complexite sociale de ce groupe 
