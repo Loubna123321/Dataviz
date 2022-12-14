@@ -9,15 +9,13 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Les sciences sociales, se sont depuis longtemps intéressées à l'homogamie dans la mise en couple. 
+Les sciences sociales, se sont depuis longtemps intéressées à l'homogamie sociale.
 L'homogamie est défini par M. Bouchet-Valat et S. Grobon comme "l'appartenance des deux conjoints à la même catégorie" (M. Bouchet-Valat & S. Grobon, (2019). Homogames un jour, homogames toujours, Rencontre pendant les études et proximité de diplôme et de carrière au sein des couple en France, p.137). 
-Ils entendent par même catégorie le fait d'appartenir à la même classe sociale d'origine ainsi que d'avoir le même niveau de diplome, ou proche.
-Nous savons donc que la mise en couple est dans une grande majorité basé sur une ressemblance assez proche des individus en terme de classe sociale et d'éducation, ainsi que de niveau de diplome. 
- Toutefois, nous les écrits sociologiques sur la représentation de l'homogamie en fonction de la religion sont assez rescents. 
-Nous pouvons tout de même retrouver un écrit de M. Maudet, intitulé 'Si l'amour rend aveugle, la religion lui redonne la vue'(2021), qui s'interesse à l'homogamie religieuse en France. 
-L'homogamie religieuse est définie par M. Maudet comme "le fait d'appartenir au même groupe religieux/non religieux que son ou sa conjoint.e" (2021, p.2).
-
-C'est pourquoi, dans le cadre de ce devoir, nous allons à partir de deux bases de données, s'interesser à l'homogamie générale des couples en France en 2003 et 2013. Puis nous allons nous plus particulirement s'attarder sur l'homogamie religieuse en 2003 et 2013. 
+Ils entendent par "même catégorie" le fait d'appartenir à la même classe sociale d'origine ainsi que d'avoir le même niveau de diplome, ou proche.
+Nous savons donc que la mise en couple est fortement correlée à une ressemblance assez proche des individus en termes de classe sociale et d'éducation, ainsi que de niveau de diplome.
+D'un autre côté, les travaux sociologiques prenant pour objet la religion et ses influences socialisatrices sont assez rescents ce qui rend relativement rares les études sur les liens entre religion et mise en couple. Nous pouvons tout de même retrouver un écrit de M. Maudet, intitulé 'Si l'amour rend aveugle, la religion lui redonne la vue'(2021), qui s'intéresse à l'homogamie religieuse en France. 
+L'homogamie religieuse y est définie par M. Maudet comme "le fait d'appartenir au même groupe religieux/non religieux que son ou sa conjoint.e" (2021, p.2).
+Sans rentrer avec une même profondeur dans le sujet, nous allons, dans le cadre de ce devoir et à partir de deux bases de données, nous evertuer à décrire le lien entre homogamie et religiosité, en France en 2003 et en 2013.
 
 # Présentation des bases de données
 
