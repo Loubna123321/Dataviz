@@ -116,7 +116,10 @@ head(epic) #Affichage des 05 premières lignes
 dim(epic)
 str(epic)
 ```
-
+On appelle enfin le script d'exploration de données :
+```{r}
+source("exploration_epic.R")
+```
 # Description de la population
 
 ## 1. Population religieuse 
