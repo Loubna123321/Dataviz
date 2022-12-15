@@ -386,9 +386,9 @@ table(epic$meme_diplome)
 ##tableau trie a plat ( tableau de contingence)
 tab_epic = table(epic$meme_diplome,epic$Religiosite)
 tab_hdv = table(hdv$meme_diplome,hdv$Religiosite)
-####nous avons constaté que les personnes qui se déclarent croyants porte moins attentions à l'homogamie de diplome(73.3) que les non croyant(25.4)
-lprop(tab_epic)
-lprop(tab_hdv)
+#### chez les croyants (73), il y a tant d'homogamie, ce qui est plus/moins que chez les non-croyants (25).
+cprop(tab_epic)
+cprop(tab_hdv)
 mosaicplot(tab_epic)
 library(ggmosaic)
 
@@ -401,7 +401,6 @@ ggplot(data = hdv) +
   geom_mosaic(aes(x = product(meme_diplome, Religiosite), fill = Religiosite, na.rm = TRUE)) +
   xlab("") + ylab("") +
   theme(legend.position = "bottom")
-##le tableau nous montre que les individue qui croient au catholisisme semble avoir le Brevet des colleges,BEPC,brevet ?l?mentaire,DNB ou dipl?me ?trangers de meme niveau comme dipl?me le plus ?lev? (64.8).
 
 
 ###############################Emmanuel###########################:
