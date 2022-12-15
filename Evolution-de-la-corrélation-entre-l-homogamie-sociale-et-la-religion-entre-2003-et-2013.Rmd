@@ -85,6 +85,9 @@ Et on appelle le script de recodage contenant les traitements des variables de l
 source("recodage_hdv2003.R")
 ```
 
+```{r}
+plot_str(hdv)
+```
 
 
 ```{r}
@@ -97,6 +100,8 @@ dim(hdv) # Nombre de colonnes et nombre de lignes
 describe(hdv) # Statistiques sur la bases de données
 str(hdv) # Description des variables 
 ```
+
+
 
 
 ## Exploration et nettoyage de la base EPIC: 
@@ -113,6 +118,11 @@ source("recodage_epic.R")
 ```
 
 ```{r}
+plot_str(epic)
+```
+
+
+```{r}
 head(epic) #Affichage des 05 premières lignes
 
 ```
@@ -125,6 +135,7 @@ dim(epic)
 describe(epic) # Statistiques sur la bases de données
 str(epic)
 ```
+
 
 
 # Description de la population
