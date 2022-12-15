@@ -213,6 +213,164 @@ Nous pouvons dire que plus de la moitié des Français sont catholiques.
 L'islam est la deuxiéme religion la plus pratiquée en France en 2013, avec plus de 6%
 
 
+
+# 2.Religiosité, mise en couple et âge
+
+Dans cette partie, nous allons analyser les personnes en couple en fonction de leur réligionisité en 2003, puis en 2013.
+Puis, nous allons pouvoir comparer ces deux cas.
+Par la suite, nous allons analyser l'age en fonction de la réligionisité en 2003, puis en 2013.
+Puis, nous allons pouvoir comparer ces deux cas.
+
+
+# 2.a)Répartition des personnes en couples en fonction de la religiosité:
+
+Voyons en premier lieu la répartition des personnes en couple:
+```{r}
+ggplot(hdv) +
+  aes(x = Vie_en_couple) +
+  geom_bar(fill = "#0C4C8A") +
+  labs(title = "Vie en couple") +
+  theme_bw()
+```
+Nous pouvons remarquer que les personnes en couple sont pres de deux foix plus les personnes célibataires.
+
+## Répartition des personnes en couples en fonction de la religiosité en 2003 :
+```{r}
+hdv %>%
+  filter(Vie_en_couple %in% "oui") %>%
+  filter(!(Religiosite %in% "NSP")) %>%
+  ggplot() +
+  aes(x = Religiosite) +
+  geom_bar(fill = "#0C4C8A") +
+  labs(x = "Croyance et pratiques",title = "La question de pratiques et croyance réligieux pour les individus en couple en 2003") +
+  theme_bw() +
+  facet_wrap(vars(Vie_en_couple))
+```
+
+En 2003 nous pouvons remarquer que l'échantillon des personnes religieuses et en couple dépasse 4000. Tandis que l'échantillon des personnes non religieuses et en couple est de 1400.
+
+## Répartition des personnes en couples en fonction de la religiosité en 2013 :
+```{r}
+epic %>%
+  filter(Indic_relation_amour %in% "relation amoureuse ou en couple") %>%
+  filter(!(Religiosite %in% 
+             "Ne souhaite pas repondre")) %>%
+  ggplot() +
+  aes(x = Religiosite) +
+  geom_bar(fill = "#0C4C8A") +
+  labs(x = "Croyance",title = "Religiosité des individus en couple en 2013") +
+  theme_bw() +
+  facet_wrap(vars(Indic_relation_amour))
+```
+En 2013, l'échantillon des personnes religieuses et en couple (ou en relation) dépasse 4000. Tandis que l'échantillon des 
+personnes non religieuses et non en couple est presque de 1500 personnes.
+
+## Analyse:
+Nous pouvons remarquer que la pourcentage des personnes croyantes et en couple interrogées en 2003 est similaire au pourcentage des personnes en couple ou en relation interrogées en 2013.  
+Nous pouvons donc conclure que il n'y a pas de différence remarquable entre 2003 et 2013, concernant les personnes en couple et croyantes. 
+
+# 2.b) Répartition d'age en fonction de la religion:
+
+
+## Répartition de l'age en fonction des partiques et croyances en 2003 :
+```{r}
+hdv %>%
+  filter(!(Religiosite %in% "NSP")) %>%
+  ggplot() +
+  aes(x = Religiosite, y = Age_enquete) +
+  geom_jitter(size = 1.5) +
+  labs(x = "Age de l'enqueté", 
+       y = "Croyance et pratiques", title = "Age en fonction de partiques et croyance en 2003")
+```
+
+## Analyse:
+En 2003:
+  On remarque que l'age des personnes interrogées varie entre 15 ans et 90 ans:
+pour les personnes croyants:
+les personnes agées de 35 ans à 55 ans sont les personnes qui déclarent le plus être croyants. 
+
+pour les personnes  non-croyants:
+On voit que les personnes qui se déclarent le plus 'non-croyantes' sont les jeunes , toutefois, les personnes non croyantes reste inférieur aux personnes croyantes. 
+
+
+
+
+Voyons un autre figure pour pouvoir analyser au mieux et tirer des conclusions plus pertinentes:
+```{r}
+hdv %>%
+  filter(!(Religiosite %in% "NSP")) %>%
+  ggplot() +
+  aes(y= Age_enquete, fill = Religiosite) +
+  geom_boxplot() +
+  scale_fill_hue(direction = 1) +
+  theme_light()
+```
+en 2003:
+on constate que les personnes croyantes sont agé de 15 à 90 ans, avec:
+-Premier quartile autour de 37 ans
+-La médiane est autour de 50 ans
+-Troisieme quartile autour de 63ans
+
+alors que les personnes non croyantes sont agés de 15 à 85 ans avec des outliers, avec:
+-Premier quartile autour de 31 ans
+-La médiane est autour de 40 ans
+-Troisieme quartile autour de 53ans
+
+
+
+# Répartition Age en fonction de la croyance en 2013 :
+```{r}
+epic %>%
+  filter(!(Religiosite %in% "Ne souhaite pas repondre")) %>%
+  ggplot() +
+  aes(x = Religiosite, y = Age_individu) +
+  geom_jitter(size = 1.5) +
+  labs(x = "Age de l'enqueté", y = "croyance",
+       title = "Age en fonction de croyance en 2013") +
+  theme_gray()
+```
+en 2013:
+On remarque que l'age des personnes varie entre 20 et 70 ans :
+les personnes croyantes sont plus nombreuses que les non croyantes, et plus les personnes sont agées, plus elles sont croyantes.
+Alors que pour les personnes non croyantes, on remarque qu'elles sont beaucoup moins nombreuses que les croyantes.
+
+
+
+Voyons un autre figure pour pouvoir analyser davantage :
+```{r}
+epic %>%
+  filter(!(Religiosite %in% "Ne souhaite pas repondre")) %>%
+  ggplot() +
+  aes(fill = Religiosite, y = Age_individu) +
+  geom_boxplot() +
+  scale_fill_hue(direction = 1) +
+  theme_light()
+```
+en 2013:
+on constate que les croyants sont agés de 20 à 70 ans, avec:
+-Premier quartile autour de 39 ans
+-La médiane est autour de 48 ans
+-Troisieme quartile autour de 57 ans
+
+alors que les non croyants sont agé de 20 à 70 ans, avec:
+-Premier quartile autour de 34 ans
+-La médiane est autour de 44 ans
+-Troisieme quartile autour de 52 ans
+
+
+Conclusion:
+La religiosité en fonction de l'âge entre 2003 et 2013:
+Nous pouvons remarquer un léger changement de croyance en fonction de l'age des croyants:
+En 2003, le nombre de personne croyantes est le plus élevé entre 35 et 55 ans.
+En 2013, plus l'age augmente plus le nombre des personnes croyantes augmente.
+
+En 2003, l'age médiane des personnes croyantes est autour de 50 ans
+En 2013, l'age médiane des personnes croyantes est autour de 48 ans
+
+En 2003, l'age médiane des personnes non-croyantes est autour de 40 ans
+En 2013, l'age médiane des personnes non-croyantes est autour de 44 ans
+
+
 # Homogamie sociale et religiosité
 
 ## 1. Niveaux de diplôme
