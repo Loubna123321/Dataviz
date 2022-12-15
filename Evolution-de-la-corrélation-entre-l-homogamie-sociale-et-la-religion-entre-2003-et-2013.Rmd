@@ -447,13 +447,10 @@ tableau trie a plat ( tableau de contingence)
 tab_epic = table(epic$meme_diplome,epic$Religiosite)
 tab_hdv = table(hdv$meme_diplome,hdv$Religiosite)
 ```
-nous avons constaté que les personnes qui se déclarent croyants porte moins attentions à l'homogamie de diplome(73.3) que les non croyant(25.4)
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Attention ! si la différence est si importante, c'est parce qu'il y a beaucoup plus de croyants que de non croyants (on est sur du 73/25), ce qu'il nous faut c'est "chez les croyants, il y a tant d'homogamie, ce qui est plus/moins que chez les non-croyants"
-Pour ça, il faut utiliser 'cprop' et non 'lprop'
+chez les croyants (73), il y a tant d'homogamie, ce qui est plus/moins que chez les non-croyants (25).
 ```{r}
-lprop(tab_epic)
-lprop(tab_hdv)
+cprop(tab_epic)
+cprop(tab_hdv)
 mosaicplot(tab_epic)
 
 
@@ -468,8 +465,6 @@ ggplot(data = hdv) +
   theme(legend.position = "bottom")
 ```
 
-Le tableau nous montre que les individu qui croient au catholicisme semblent avoir le Brevet des collèges,BEPC,brevet élémentaire,DNB ou diplôme étrangers de même niveau comme diplôme le plus élevé (64.8).
-!!!!!!!!!!!!!!!!!!!!!!!!!! On ne fait ici, aucune différence entre les religions, et puis quel est l’intérêt de dire que les croyants ont des diplômes ? 
 
 
 ## 2.Homogamie proffessionnelle
