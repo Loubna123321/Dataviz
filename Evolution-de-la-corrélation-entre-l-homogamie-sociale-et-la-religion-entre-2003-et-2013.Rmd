@@ -220,12 +220,12 @@ Puis, nous allons pouvoir comparer ces deux cas.
 
 # 2.a)Répartition des personnes en couples en fonction de la religiosité:
 
-Voyons en premier lieu la répartition des personnes en couple:
+Voyons en premier lieu la répartition des personnes en couple en 2003 avec la base HDV:
 ```{r}
 ggplot(hdv) +
   aes(x = Vie_en_couple) +
   geom_bar(fill = "#0C4C8A") +
-  labs(title = "Vie en couple") +
+  labs(title = "Vie en couple en 2003") +
   theme_bw()
 ```
 Nous pouvons remarquer que les personnes en couple sont pres de deux foix plus les personnes célibataires.
@@ -238,12 +238,22 @@ hdv %>%
   ggplot() +
   aes(x = Religiosite) +
   geom_bar(fill = "#0C4C8A") +
-  labs(x = "Croyance et pratiques",title = "La question de pratiques et croyance réligieux pour les individus en couple en 2003") +
+  labs(x = "Croyance et pratiques",title = "La question de pratiques et croyance réligieux pour les individus en couple 2003") +
   theme_bw() +
   facet_wrap(vars(Vie_en_couple))
 ```
 
 En 2003 nous pouvons remarquer que l'échantillon des personnes religieuses et en couple dépasse 4000. Tandis que l'échantillon des personnes non religieuses et en couple est de 1400.
+
+Voyons la répartition des personnes en couple ou en relation amoureuse:
+```{r}
+ggplot(epic) +
+  aes(x = Indic_relation_amour) +
+  geom_bar(fill = "#0C4C8A") +
+  labs(title = "Vie en couple ou en relation amoureuse en 2013") +
+  theme_bw()
+```
+Il est clair que les personnes en couple ou en relation amoureuse sont 2 fois plus les personnes en autres situations
 
 ## Répartition des personnes en couples en fonction de la religiosité en 2013 :
 ```{r}
@@ -275,13 +285,13 @@ hdv %>%
   ggplot() +
   aes(x = Religiosite, y = Age_enquete) +
   geom_jitter(size = 1.5) +
-  labs(x = "Age de l'enqueté", 
-       y = "Croyance et pratiques", title = "Age en fonction de partiques et croyance en 2003")
+  labs(x = "Croyance et pratiques", 
+       y = "Age de l'enqueté", title = "Age en fonction de partiques et croyance en 2003")
 ```
 
 ## Analyse:
 En 2003:
-  On remarque que l'age des personnes interrogées varie entre 15 ans et 90 ans:
+On remarque que l'age des personnes interrogées varie entre 15 ans et 90 ans:
 pour les personnes croyants:
 les personnes agées de 35 ans à 55 ans sont les personnes qui déclarent le plus être croyants. 
 
@@ -299,7 +309,9 @@ hdv %>%
   aes(y= Age_enquete, fill = Religiosite) +
   geom_boxplot() +
   scale_fill_hue(direction = 1) +
-  theme_light()
+  theme_light()+
+  labs(y = "Age", title = "Age en fonction de partiques et croyance en 2003")
+
 ```
 en 2003:
 on constate que les personnes croyantes sont agé de 15 à 90 ans, avec:
@@ -314,14 +326,14 @@ alors que les personnes non croyantes sont agés de 15 à 85 ans avec des outlie
 
 
 
-# Répartition Age en fonction de la croyance en 2013 :
+# Répartition Age en fonction de la croyance en 2013 avec la base epic :
 ```{r}
 epic %>%
   filter(!(Religiosite %in% "Ne souhaite pas repondre")) %>%
   ggplot() +
   aes(x = Religiosite, y = Age_individu) +
   geom_jitter(size = 1.5) +
-  labs(x = "Age de l'enqueté", y = "croyance",
+  labs(x = "croyance", y = "Age de l'enqueté",
        title = "Age en fonction de croyance en 2013") +
   theme_gray()
 ```
@@ -340,7 +352,8 @@ epic %>%
   aes(fill = Religiosite, y = Age_individu) +
   geom_boxplot() +
   scale_fill_hue(direction = 1) +
-  theme_light()
+  theme_light()+
+  labs(title = "Age en fonction de croyance en 2013")
 ```
 en 2013:
 on constate que les croyants sont agés de 20 à 70 ans, avec:
