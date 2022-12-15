@@ -1,8 +1,12 @@
 ---
-title: "Evolution de la corrélation entre l'homogamie sociale et la religion entre 2003 et 2013"
-author: "Loubna Zidan, Anouchka Béal-Récard, Justine Guieu, Sokhna Mbathio Mbengue, Emmanuel Herbepin"
-date: 'Décembre 2022'
-output: html_document
+title: Evolution de la corrélation entre l'homogamie sociale et la religion entre
+  2003 et 2013
+author: "Loubna Zidan, Anouchka Béal-Récard, Justine Guieu, Sokhna Mbathio Mbengue,
+  Emmanuel Herbepin"
+date: "Décembre 2022"
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -276,11 +280,17 @@ hdv %>%
   labs(x = "Age de l'enqueté", 
        y = "Croyance et pratiques", title = "Age en fonction de partiques et croyance en 2003")
 ```
+
+## Analyse:
 En 2003:
 On remarque que l'age des personnes interrogées varie entre 15 ans et 90 ans:
+pour les personnes croyants:
 les personnes agées de 35 ans à 55 ans sont les personnes qui déclarent le plus être croyants. 
-On peut constater qu'à partir de 55ans, les personnes se déclarent moins croyantes, toutefois, les personnes non croyantes reste inférieur aux personnes croyantes. 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! C'est faux : On voit que les personnes qui se déclarent le plus 'non-croyantes' sont les jeunes ! (colonne de droite), s'il y a de moins en moins de points après 55 ans ( je dirais meme plutot 65) dans la colonne de gauche... c'est parcequ'il y a de moins en moins de personnes vu... qu'elles meurent...
+
+pour les personnes  non-croyants:
+On voit que les personnes qui se déclarent le plus 'non-croyantes' sont les jeunes , toutefois, les personnes non croyantes reste inférieur aux personnes croyantes. 
+
+
 
 
 Voyons un autre figure pour pouvoir analyser au mieux et tirer des conclusions plus pertinentes:
