@@ -58,7 +58,7 @@ epic$Importance_religion_enquete <- fct_recode(epic$Importance_religion_enquete,
                                                "Importante ou assez importante"="1",
                                                "Peu importante"="2",
                                                "Sans importance"= "3",
-                                               "Ne souhaite pas répondre"="8")
+                                               "Ne souhaite pas repondre"="8")
 
 #------------------------------------------------------------------------------------------
 
@@ -75,7 +75,7 @@ epic$Religion_conjoint <- fct_recode(epic$Religion_conjoint,
                                      "Judaisme"="6",
                                      "Autre"="7",
                                      "Sans religion"="8",
-                                     "Ne souhaite pas répondre"="98",
+                                     "Ne souhaite pas repondre"="98",
                                      "Ne sait pas"="99")
 
 #------------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ epic$Religion_enquete <- fct_recode(epic$Religion_enquete,
                                     "Judaisme"="6",
                                     "Autre"="7",
                                     "Sans religion"="8",
-                                    "Ne souhaite pas répondre"="98")
+                                    "Ne souhaite pas repondre"="98")
 
 #------------------------------------------------------------------------------------------
 
@@ -102,14 +102,14 @@ epic$Religion_enquete <- fct_recode(epic$Religion_enquete,
 epic$Diplome_eleve_conjoint <- as.factor(epic$Diplome_eleve_conjoint) #je transforme ma variable en facteur.
 
 epic$Diplome_eleve_conjoint <- fct_recode(epic$Diplome_eleve_conjoint,
-                                          "Aucun diplôme"="1",
+                                          "Aucun diplome"="1",
                                           "Primaires"="2",
-                                          "Brevet collèges ou élémentaire"= "3",
+                                          "Brevet collèges ou elementaire"= "3",
                                           "CAP, BEP"="4",
-                                          "Baccalauréat ou brevet supérieur"="5",
+                                          "Baccalaureat ou brevet superieur"="5",
                                           "BTS, DEUG, DEUST,niveau bac+2"="6",
                                           "Licence,bac+3, bac+4"="7",
-                                          "Master2, doctorat de médecine, pharmacie, odontologie,diplôme grande école bac+5"="8",
+                                          "Master2, doctorat de médecine, pharmacie, odontologie,diplôme grande ecole bac+5"="8",
                                           "Doctorat de recherche (hors santé)"="9",
                                           "Ne sait pas"="99")
 
@@ -120,15 +120,15 @@ epic$Diplome_eleve_conjoint <- fct_recode(epic$Diplome_eleve_conjoint,
 epic$Diplome_eleve_enquete <- as.factor(epic$Diplome_eleve_enquete) #je transforme ma variable en facteur.
 
 epic$Diplome_eleve_enquete <- fct_recode(epic$Diplome_eleve_enquete,
-                                         "Aucun diplôme"="1",
+                                         "Aucun diplome"="1",
                                          "Primaires"="2",
-                                         "Brevet collèges ou élémentaire"= "3",
+                                         "Brevet collèges ou elementaire"= "3",
                                          "CAP, BEP"="4",
-                                         "Baccalauréat ou brevet supérieur"="5",
+                                         "Baccalaureat ou brevet superieur"="5",
                                          "BTS, DEUG, DEUST,niveau bac+2"="6",
                                          "Licence,bac+3, bac+4"="7",
-                                         "Master2, doctorat de médecine, pharmacie, odontologie,diplôme grande école bac+5"="8",
-                                         "Doctorat de recherche (hors santé)"="9",
+                                         "Master2, doctorat de medecine, pharmacie, odontologie,diplome grande ecole bac+5"="8",
+                                         "Doctorat de recherche (hors sante)"="9",
                                          "Ne sait pas"="99")
 
 #------------------------------------------------------------------------------------------
