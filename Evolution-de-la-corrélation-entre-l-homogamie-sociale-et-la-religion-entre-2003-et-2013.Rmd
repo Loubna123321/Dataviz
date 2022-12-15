@@ -83,14 +83,18 @@ rm(hdv1,hdv4,hdv1_select, hdv4_select)
 Et on appelle le script de recodage contenant les traitements des variables de la base hdv:
 ```{r}
 source("recodage_hdv2003.R")
+```
 
+
+
+```{r}
 head(hdv) #Affichage des 05 premières lignes
 ```
 
 Voici les dimensions de la base hdv:
 ```{r}
 dim(hdv) # Nombre de colonnes et nombre de lignes
-describe(hdv) # Statistiques sur ta bases de données
+describe(hdv) # Statistiques sur la bases de données
 str(hdv) # Description des variables 
 ```
 
@@ -103,15 +107,25 @@ epic <- select(read.csv("repondant.txt", sep="\t"),
                c(IndCOU,R_IMPREL,R_RELIGC,R_RELIGION,C_DIPLOMEC,M_DIPLOME,C_CS13C,M_CS13,SEXER,H_SEXEC_C,AGEM,H_ANAISC_C,R_MOINDIPL,R_PLUDIPL))
 ```
 
-Et on appelle le script de recodage contenant les traitements des variables de la base hdv:
+Et on appelle le script de recodage contenant les traitements des variables de la base epic:
 ```{r}
 source("recodage_epic.R")
+```
 
+```{r}
 head(epic) #Affichage des 05 premières lignes
+
+```
+
+
+
+```{r}
 #Les dimensions de la base: 
 dim(epic)
+describe(epic) # Statistiques sur la bases de données
 str(epic)
 ```
+
 
 # Description de la population
 
@@ -422,10 +436,13 @@ tableau trie a plat ( tableau de contingence)
 tab_epic = table(epic$meme_diplome,epic$Religiosite)
 tab_hdv = table(hdv$meme_diplome,hdv$Religiosite)
 ```
-chez les croyants (73), il y a tant d'homogamie, ce qui est plus/moins que chez les non-croyants (25).
+nous avons constaté que les personnes qui se déclarent croyants porte moins attentions à l'homogamie de diplome(73.3) que les non croyant(25.4)
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Attention ! si la différence est si importante, c'est parce qu'il y a beaucoup plus de croyants que de non croyants (on est sur du 73/25), ce qu'il nous faut c'est "chez les croyants, il y a tant d'homogamie, ce qui est plus/moins que chez les non-croyants"
+Pour ça, il faut utiliser 'cprop' et non 'lprop'
 ```{r}
-cprop(tab_epic)
-cprop(tab_hdv)
+lprop(tab_epic)
+lprop(tab_hdv)
 mosaicplot(tab_epic)
 
 
@@ -439,6 +456,11 @@ ggplot(data = hdv) +
   xlab("") + ylab("") +
   theme(legend.position = "bottom")
 ```
+
+Le tableau nous montre que les individu qui croient au catholicisme semblent avoir le Brevet des collèges,BEPC,brevet élémentaire,DNB ou diplôme étrangers de même niveau comme diplôme le plus élevé (64.8).
+!!!!!!!!!!!!!!!!!!!!!!!!!! On ne fait ici, aucune différence entre les religions, et puis quel est l’intérêt de dire que les croyants ont des diplômes ? 
+
+
 ## 2.Homogamie proffessionnelle
 
 Pour pouvoir étudier le comportement homogame dans sa dimension professionnelle, nous allons regrouper les modalités des variables de CSP de chaque base en trois catégories :
